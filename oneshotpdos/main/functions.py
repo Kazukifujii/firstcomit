@@ -83,5 +83,15 @@ def set_pdosdata(directory):
             return
         files=glob.glob(directory+'/dos.isp1.site*')
         files=[re.search(r"([^/]*?)$",s).group() for s in files]
-        result={key:pd.read_csv(directory+'/'+key,header=None,index_col=0,comment='#',delim_whitespace=True) for key in files}
-        return result
+        opdosdic={key:pd.read_csv(directory+'/'+key,header=None,index_col=0,comment='#',delim_whitespace=True) for key in files}
+        r=13.605
+        orbital=list(range(1,6))
+        realpdosdic={key:pd.DataFrame(columns=orbital,index=opdosdic[key].index*r).fillna(0) for key in files}
+        for k,key in enumerate(opdosdic):
+            opdosdic[key].index=opdosdic[key].index*r
+            for i in orbital:
+                anl=int(0.5*i*((i-1)*2+2))
+                anf=int(0.5*(i-1)*((i-2)*2+2)+1)
+                for j in range(anf,anl+1):
+                    realpdosdic[key][i]+=opdosdic[key][j]/r
+        return realpdosdic

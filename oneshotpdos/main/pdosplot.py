@@ -16,14 +16,13 @@ def sumpdos(dir,ciflist,orbital='s',indexnumber=None):
     pdoslist=[dir+'/'+f+'.cif' for f in files if os.path.isdir(os.path.join(pdir, f))]
     newciflist=[pdoslist[idx:idx + 4] for idx in range(0,len(pdoslist), 4)]
     for i,cif in enumerate(newciflist):
-    pdosplot.sumpdos(dir,cif,orbital='s',indexnumber=i)
+    pdosplot.sumpdos(pdir,cif,orbital='s',indexnumber=i)
     """
-    dir=dir+''
     selectorbital=orbital
     pnglist=list()
     for i,ciffile in enumerate(ciflist):
         cifdata=setcifdata(ciffile)
-        pngdir=dir+'/pdospng/'+cifdata.cifnumber
+        pngdir=dir+'/'+cifdata.cifnumber
         if not os.path.isdir(dir):
             print('No such npg is '+pngdir)
             continue
@@ -34,7 +33,6 @@ def sumpdos(dir,ciflist,orbital='s',indexnumber=None):
                 matchpng.append(file)
         matchpng=sorted(matchpng)
         pnglist.append(matchpng)
-
     n_row=len(pnglist)
     n_col=0
     for i in pnglist:
@@ -98,23 +96,10 @@ for cifdata in cifdatas:
     plt.clf()
     if not fig_name:
         fig_name=re.search(r"([^/]*?)$",cifdir).group()
-    try:
-        pdosdic=set_pdosdata(cifdir)
-        pdosdf=pdosdic[key]
-    except:
-        print('No data '+fig_name)
-        return
-    r=13.605
-    pdosdf.index=pdosdf.index*r
-    realpdosdf=pd.DataFrame(columns=orbital,index=pdosdf.index).fillna(0)
-    ls=list()
+    pdosdic=set_pdosdata(cifdir)
+    pdosdf=pdosdic[key]
     for i in orbital:
-        anl=int(0.5*i*((i-1)*2+2))
-        anf=int(0.5*(i-1)*((i-2)*2+2)+1)
-        for j in range(anf,anl+1):
-            realpdosdf[i]=pdosdf[j]/r+realpdosdf[i]
-            ls.append(j)
-        realpdosdf[i].plot()
+        pdosdf[i].plot()
     for i in range(len(orbital)):
         I=orbital[i]
         if I==1:
