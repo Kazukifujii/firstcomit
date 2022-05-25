@@ -1,0 +1,5 @@
+===START LMF   ===
+ mpisize=           4
+Exit -1 No ctrl file found! ctrl.tmp
+ERROR: fexit, error code=   -1
+

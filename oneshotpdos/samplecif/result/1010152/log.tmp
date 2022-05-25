@@ -1,0 +1,44 @@
+=== START LMCHK   ===
+ mpisize=           1
+fa Z  51.0   rm  49.10  qc 46.00  qspl 0.00559  dq 0.00000  Etot  -12951.565008
+fa Z  13.0   rm  48.52  qc 10.00  qspl 0.00020  dq 0.00000  Etot    -483.532533
+ CPU time:    0.075 sec    Fri May 13 00:06:17 2022 on 
+=== START LFMA ===
+ mpisize=           1
+fa op 0   8  1.280 -0.467  stf     0   496  ev -0.95810 -0.96170  pq  5.87  2.00
+fa op 1  11  1.280 -0.100  stf     0  2893  ev -0.34725 -0.36685  pq  5.80  3.00
+fa op sumev   -3.02395   opt basis   -2.95796   err  0.06599
+fa Z  51.0   rm  49.90  qc 46.00  qspl 0.05616  dq 0.00000  Etot  -12951.956498
+fa op 0  11  1.150 -0.176  stf     0  3125  ev -0.55763 -0.57548  pq  3.80  2.00
+fa op 1  11  1.150 -0.100  stf     0  -633  ev -0.09729 -0.20452  pq  3.69  1.00
+fa op sumev   -1.35547   opt basis   -1.21254   err  0.14293
+fa Z  13.0   rm  49.07  qc 10.00  qspl 0.00350  dq 0.00000  Etot    -483.540801
+ CPU time:    0.134 sec    Fri May 13 00:06:18 2022 on 
+===START LMF   ===
+ mpisize=           4
+bz  nq 8 ( 4 4 4 )  shift  F F F
+ov qvl   8.000000  sm   9.386479  loc  -1.386479   bg  0.000000  dQ  0.000000
+fp qvl   8.000000  sm   9.386479  loc  -1.386479  qbg   0.000000 dQ   0.000000
+fp pot  rvxc      -484.7582065  rexc       -365.6765991  rves   -27203.1700543
+fp pot  rex       -353.8697752  rec         -11.8068239
+fp evl -0.6279  0.1986  0.1986  0.1986  0.3588  0.5952  0.5952  0.5952
+fp evl  0.9960  0.9960  1.4650  1.4650  1.4650  1.9115
+bz met T  tet T  ef 0.198576  sev -0.822040  zval 8.0 qval 8.0 gap 2.1794 eV
+fp Har: U  -27203.170054  T   14133.442334  sev     -0.822040  EH  -13435.404319
+fp qvl   8.000000  sm  15.060379  loc  -7.060379  qbg   0.000000 dQ   0.000000
+fp pot  rvxc      -486.7458033  rexc       -367.1819448  rves   -27218.2171690
+fp pot  rex       -355.3033209  rec         -11.8786239
+fp KS: U  -27218.2171690 T   14150.2887528 Exc   -367.1819448 EKS -13435.1103610
+fp 4g  ;Anderson n 0 beta 0.2  sm-dq 0.0513  mx loc 0.105  dq 0.0514
+===START LMF   ===
+ mpisize=           4
+bz  nq 8 ( 4 4 4 )  shift  F F F
+ov qvl   8.000000  sm   9.386479  loc  -1.386479   bg  0.000000  dQ  0.000000
+fp qvl   8.000000  sm   9.386479  loc  -1.386479  qbg   0.000000 dQ   0.000000
+fp pot  rvxc      -484.7582065  rexc       -365.6765991  rves   -27203.1700543
+fp pot  rex       -353.8697752  rec         -11.8068239
+fp evl -0.6279  0.1986  0.1986  0.1986  0.3588  0.5952  0.5952  0.5952
+fp evl  0.9960  0.9960  1.4650  1.4650  1.4650  1.9115  1.9115  2.0263
+fp evl  2.0263  2.0263
+===START LMF   ===
+ mpisize=           4

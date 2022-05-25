@@ -1,0 +1,8 @@
+  0.1704962065274519D+00 # (Ry) Fermi energy given by lmf
+  0.4394766737330187D+00 # (Ry) Top of Valence
+  0.8955415814854301D-01 # (Ry) Bottom of conduction
+  0.8000000000000000D+01  0.0000000000000000D+00 #before: number of electrons total at sites:qval, backg:qbg=
+  0.7999999999997923D+01  0.0000000000000000D+00 # band: charge(nup+nspin), mag.mom(nup-ndown)
+           -25.097296686 # band: band energy sum (eV)=
+         4         4         4    # Used k point to determine Ef
+     1# iter CAUTION! This file is overwritten by lmf-MPIK SC loop

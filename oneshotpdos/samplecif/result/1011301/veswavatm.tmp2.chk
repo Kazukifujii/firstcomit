@@ -1,0 +1,16 @@
+      3.000000000000000 ! total charge
+ 1  4 !nsp,lmaxa
+ 1  0  3 -0.575475451811606D+00  0.387600073932695D+00 !isp,l,eval,last is norm within MT
+ 1  1  3 -0.204522024383030D+00  0.188414989266625D+00 !isp,l,eval,last is norm within MT
+ 1  2  3  0.123262914559595D-01  0.212391025880614D-04 !isp,l,eval,last is norm within MT
+ 1  3  4  0.187541722720267D-01  0.246721727807564D-08 !isp,l,eval,last is norm within MT
+ 1  4  5  0.258675167039494D-01  0.347206950451233D-11 !isp,l,eval,last is norm within MT
+9 9 9 9 9 --------! this is terminator for an atom section
+      5.000000000000000 ! total charge
+ 1  4 !nsp,lmaxa
+ 1  0  3 -0.103025694585653D+01  0.694395411069033D+00 !isp,l,eval,last is norm within MT
+ 1  1  3 -0.411353577516509D+00  0.490410584458667D+00 !isp,l,eval,last is norm within MT
+ 1  2  3  0.129497659962679D-01  0.650520650212089D-05 !isp,l,eval,last is norm within MT
+ 1  3  4  0.192466691675608D-01  0.130055975520221D-08 !isp,l,eval,last is norm within MT
+ 1  4  5  0.264730437077153D-01  0.246970027423601D-11 !isp,l,eval,last is norm within MT
+9 9 9 9 9 --------! this is terminator for an atom section

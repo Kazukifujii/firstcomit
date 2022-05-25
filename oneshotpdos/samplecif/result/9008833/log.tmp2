@@ -1,0 +1,11 @@
+=== START LFMA ===
+ mpisize=           1
+fa op 0  10  0.855 -0.223  stf     0  2539  ev -0.66699 -0.68971  pq  2.79  2.00
+fa op 1  11  0.855 -0.100  stf     0   655  ev -0.21528 -0.27306  pq  2.77  1.00
+fa op sumev   -1.65248   opt basis   -1.54926   err  0.10322
+fa Z   5.0   rm  19.47  qc  2.00  qspl 0.00013  dq 0.00000  Etot     -48.703227
+fa op 0   7  1.040 -0.470  stf     0   674  ev -1.07202 -1.08042  pq  4.85  2.00
+fa op 1  11  1.040 -0.100  stf     0  2547  ev -0.35449 -0.39256  pq  4.77  3.00
+fa op sumev   -3.33852   opt basis   -3.20752   err  0.13100
+fa Z  33.0   rm  48.54  qc 28.00  qspl 0.04206  dq 0.00000  Etot   -4515.531967
+ CPU time:    0.090 sec    Fri May 13 00:05:24 2022 on 

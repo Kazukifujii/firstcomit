@@ -1,0 +1,48 @@
+['Ga+3', 'N-3']
+CIF2CELL 1.2.10
+2022-05-13 0:07
+Output for unknown compound
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Miwa, K. and Fukumoto, A., Physical Review, Serie 3. B - Condensed 
+Matter (18,1978-) 48, 7897-7902 (1993) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Lattice parameters:
+          a           b           c 
+  3.1460000   3.1460000   5.1250000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000 120.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+Ga     -0.3333000  -0.6667000   0.0000000
+N      -0.3333000  -0.6667000   0.3770000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Bravais lattice vectors :
+  0.8660254  -0.5000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.0000000   0.0000000   1.6290528 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+Ga      0.6666667   0.3333333   0.0000000
+Ga      0.3333333   0.6666667   0.5000000
+N       0.6666667   0.3333333   0.3770000
+N       0.3333333   0.6666667   0.8770000
+
+Unit cell volume  :  43.9280513 A^3
+Unit cell density :   3.8121199 u/A^3 =  42.7181242 g/cm^3

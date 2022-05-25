@@ -1,0 +1,46 @@
+['Hg2+', 'Se2-']
+CIF2CELL 1.2.10
+2022-05-13 0:07
+Output for Hg Se (Mercury selenide)
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+de Jong, W F, Zeitschrift fuer Kristallographie, Kristallgeometrie, 
+Kristallphysik,Kristallchemie (-144,1977) 63, 466-472 (1926) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Cubic crystal system.
+Space group number     : 216
+Hall symbol            : F -4 2 3
+Hermann-Mauguin symbol : F-43m
+
+Lattice parameters:
+          a           b           c 
+  6.0400000   6.0400000   6.0400000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000  90.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+Hg      0.0000000   0.0000000   0.0000000
+Se      0.2500000   0.2500000   0.2500000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Cubic crystal system.
+Space group number     : 216
+Hall symbol            : F -4 2 3
+Hermann-Mauguin symbol : F-43m
+
+Bravais lattice vectors :
+  0.5000000   0.5000000   0.0000000 
+  0.5000000   0.0000000   0.5000000 
+  0.0000000   0.5000000   0.5000000 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+Hg      0.0000000   0.0000000   0.0000000
+Se      0.2500000   0.2500000   0.2500000
+
+Unit cell volume  :  55.0872160 A^3
+Unit cell density :   5.0746801 u/A^3 =  56.8662108 g/cm^3

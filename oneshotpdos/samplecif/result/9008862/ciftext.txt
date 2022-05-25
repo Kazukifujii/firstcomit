@@ -1,0 +1,47 @@
+None
+CIF2CELL 1.2.10
+2022-05-13 0:05
+Output for unknown compound
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Wyckoff, R. W. G., Crystal Structures 1, 85-237 (1963) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Lattice parameters:
+          a           b           c 
+  4.1348000   4.1348000   6.7490000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000 120.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+Cd      0.3333300   0.6666700   0.0000000
+S       0.3333300   0.6666700   0.3850000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Bravais lattice vectors :
+  0.8660254  -0.5000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.0000000   0.0000000   1.6322434 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+Cd      0.3333333   0.6666667   0.0000000
+Cd      0.6666667   0.3333333   0.5000000
+S       0.3333333   0.6666667   0.3850000
+S       0.6666667   0.3333333   0.8850000
+
+Unit cell volume  :  99.9261316 A^3
+Unit cell density :   2.8917061 u/A^3 =  32.4040850 g/cm^3

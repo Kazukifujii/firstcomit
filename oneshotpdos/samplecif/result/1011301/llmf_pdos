@@ -1,0 +1,15 @@
+===START LMF   ===
+ ... Doing writepdos mode. Wait a while ...
+ ... See job_pdos to know how to call --writepdos mode
+  pdosdata file=pdosdata.tmp
+ ... Doing writepdos mode. Wait a while ...
+ ... See job_pdos to know how to call --writepdos mode
+  pdosdata file=pdosdata.tmp
+ ... Doing writepdos mode. Wait a while ...
+ ... See job_pdos to know how to call --writepdos mode
+  pdosdata file=pdosdata.tmp
+ mpisize=           4
+ ... Doing writepdos mode. Wait a while ...
+ ... See job_pdos to know how to call --writepdos mode
+  pdosdata file=pdosdata.tmp
+Exit 0 done: end of --writepdos mode.

@@ -1,0 +1,45 @@
+['Te', 'Cd']
+CIF2CELL 1.2.10
+2022-05-13 0:05
+Output for unknown compound
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Owen, N.B. et al., Journal of Physics and Chemistry of Solids 24, 
+1519-1524 (1963) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Tetragonal crystal system.
+Space group number     : 141
+Hall symbol            : I 4bw 2bw -1bw
+Hermann-Mauguin symbol : I41/amd:1
+
+Lattice parameters:
+          a           b           c 
+  5.8700000   5.8700000   2.9550000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000  90.0000000 
+Representative sites :
+Atom            a1          a2          a3      occ.
+Te/Cd    0.0000000   0.0000000   0.0000000   0.5/0.5
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Tetragonal crystal system.
+Space group number     : 141
+Hall symbol            : I 4bw 2bw -1bw
+Hermann-Mauguin symbol : I41/amd:1
+
+Bravais lattice vectors :
+  1.0000000   0.0000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.5000000   0.5000000   0.2517036 
+All sites, (lattice coordinates):
+Atom            a1          a2          a3      occ.
+Te/Cd    0.0000000   0.0000000   0.0000000   0.5/0.5
+Te/Cd    0.7500000   0.2500000   0.5000000   0.5/0.5
+
+Unit cell volume  :  50.9100698 A^3
+Unit cell density :   4.7144111 u/A^3 =  52.8290831 g/cm^3

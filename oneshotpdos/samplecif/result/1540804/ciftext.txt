@@ -1,0 +1,46 @@
+['In+3', 'Sb-3']
+CIF2CELL 1.2.10
+2022-05-13 0:07
+Output for unknown compound
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Yu Shucheng and Spain, I.L., Journal of Applied Physics 49, 
+4741-4745 (1978) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Orthorhombic crystal system.
+Space group number     : 25
+Hall symbol            : P 2 -2
+Hermann-Mauguin symbol : Pmm2
+
+Lattice parameters:
+          a           b           c 
+  5.6180000   2.9190000   3.0660000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000  90.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+In      0.0000000   0.0000000   0.0000000
+Sb      0.5000000   0.0000000   0.2500000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Orthorhombic crystal system.
+Space group number     : 25
+Hall symbol            : P 2 -2
+Hermann-Mauguin symbol : Pmm2
+
+Bravais lattice vectors :
+  1.0000000   0.0000000   0.0000000 
+  0.0000000   0.5195799   0.0000000 
+  0.0000000   0.0000000   0.5457458 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+In      0.0000000   0.0000000   0.0000000
+Sb      0.5000000   0.0000000   0.2500000
+
+Unit cell volume  :  50.2791562 A^3
+Unit cell density :   4.7052898 u/A^3 =  52.7268704 g/cm^3

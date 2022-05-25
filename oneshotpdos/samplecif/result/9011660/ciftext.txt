@@ -1,0 +1,47 @@
+None
+CIF2CELL 1.2.10
+2022-05-13 0:05
+Output for BN
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Xu, Y. N. and Ching, W. Y., Physical Review B 48, 4335-4351 (1993) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Lattice parameters:
+          a           b           c 
+  2.5360000   2.5360000   4.1990000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000 120.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+B       0.6666700   0.3333300   0.0000000
+N       0.6666700   0.3333300   0.3750000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Bravais lattice vectors :
+  0.8660254  -0.5000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.0000000   0.0000000   1.6557571 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+B       0.6666667   0.3333333   0.0000000
+B       0.3333333   0.6666667   0.5000000
+N       0.6666667   0.3333333   0.3750000
+N       0.3333333   0.6666667   0.8750000
+
+Unit cell volume  :  23.3870263 A^3
+Unit cell density :   2.1225443 u/A^3 =  23.7849579 g/cm^3

@@ -1,0 +1,47 @@
+None
+CIF2CELL 1.2.10
+2022-05-13 0:07
+Output for ZnSe
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Wyckoff, R. W. G., Crystal Structures 1, 85-237 (1963) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Lattice parameters:
+          a           b           c 
+  3.9800000   3.9800000   6.5300000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000 120.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+Zn      0.3333300   0.6666700   0.0000000
+Se      0.3333300   0.6666700   0.3850000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Bravais lattice vectors :
+  0.8660254  -0.5000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.0000000   0.0000000   1.6407035 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+Zn      0.3333333   0.6666667   0.0000000
+Zn      0.6666667   0.3333333   0.5000000
+Se      0.3333333   0.6666667   0.3850000
+Se      0.6666667   0.3333333   0.8850000
+
+Unit cell volume  :  89.5797729 A^3
+Unit cell density :   3.2226025 u/A^3 =  36.1120679 g/cm^3

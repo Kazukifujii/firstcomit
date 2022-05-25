@@ -1,0 +1,49 @@
+['Zn', 'O']
+CIF2CELL 1.2.10
+2022-05-13 0:05
+Output for  (
+ ?)
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Sowa, Heidrun and Ahsbahs, Hans, Journal of Applied Crystallography 
+39, 169-175 (2006) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Lattice parameters:
+          a           b           c 
+  3.1950000   3.1950000   5.1027000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000 120.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+Zn      0.3333000   0.6667000   0.0000000
+O       0.3333000   0.6667000   0.3813000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 186
+Hall symbol            : P 6c -2c
+Hermann-Mauguin symbol : P63mc
+
+Bravais lattice vectors :
+  0.8660254  -0.5000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.0000000   0.0000000   1.5970892 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+Zn      0.3333333   0.6666667   0.0000000
+Zn      0.6666667   0.3333333   0.5000000
+O       0.3333333   0.6666667   0.3813000
+O       0.6666667   0.3333333   0.8813000
+
+Unit cell volume  :  45.1099549 A^3
+Unit cell density :   3.6080284 u/A^3 =  40.4311012 g/cm^3

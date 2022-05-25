@@ -1,0 +1,490 @@
+===START LMF   ===
+ mpisize=           4
+ CONST             opt    chr      1,  0,   *
+ HEADER            opt    chr      1,  0,   *
+ IO_VERBOS         opt    i4v      5,  1,   1,  0       35
+ IO_TIM            opt    i4v      2,  1,   2,  0       0 0
+
+ --- Parameters for crystal structure ---
+ STRUC_ALAT        reqd   r8       1,  1,   1, --       1.88973
+ STRUC_NBAS        reqd   i4       1,  1,   1, --       2
+ STRUC_PLAT        reqd   r8v      9,  9,   9, --       0 2.71 2.71 2.71 0 2.71 2.71 2.71 0
+ STRUC_NSPEC       opt    i4       1,  1,   1, --       2
+ STRUC_DALAT       opt    r8       1,  1,   *,  1       0
+ STRUC_NL          opt    i4       1,  1,   1,  0       4
+
+ --- Program Options ---
+ OPTIONS_HF        opt    lg       1,  1,   *,  1       F
+
+ --- Parameters for hamiltonian ---
+ HAM_NSPIN         opt    i4       1,  1,   1,  0       1
+ HAM_REL           opt    i4       1,  1,   1,  0       1
+ HAM_SOCAXIS       opt    r8v      3,  3,   *,  3       0 0 1
+ HAM_GMAX          reqd   r8       1,  1,   1, --       12
+ HAM_TOL           opt    r8       1,  1,   *,  1       1e-6
+ HAM_FRZWF         opt    lg       1,  1,   1,  0       F
+ HAM_FORCES        opt    i4       1,  1,   1,  0       0
+ HAM_ELIND         opt    r8       1,  1,   1,  0       0
+ HAM_XCFUN         opt    i4       1,  1,   1,  0       1
+ HAM_GGA           opt    i4       1,  1,   *,  1       0
+ HAM_RDSIG         opt    i4       1,  1,   1,  0       12
+ HAM_RSRNGE        opt    r8       1,  1,   1,  0       15
+ HAM_RSSTOL        opt    r8       1,  1,   *,  1       5e-6
+ HAM_ScaledSigma   opt    r8       1,  1,   1,  0       1
+ HAM_EWALD         opt    lg       1,  1,   *,  1       F
+ HAM_PMIN          opt    r8v     10,  1,   *, 10       0 0 0 0 0 0 0 0 0 0
+ HAM_PMAX          opt    r8v     10,  1,   *, 10       0 0 0 0 0 0 0 0 0 0
+ HAM_OVEPS         opt    r8       1,  1,   1,  0       1e-7
+ HAM_STABILIZE     opt    r8       1,  1,   *,  1       -1
+ HAM_PWMODE        opt    i4       1,  1,   1,  0       0
+ HAM_PWEMIN        opt    r8       1,  1,   *,  1       0
+ HAM_PWEMAX        opt    r8       1,  1,   1,  0       3
+
+ --- Symmetry group operations ---
+ SYMGRP            opt    chr      1,  0,   1           find
+
+ --- Symmetry group operations ---
+ SYMGRPAF          opt    chr      1,  0,   *
+
+ --- Parameters for species data ---
+ SPEC_SCLWSR       opt    r8       1,  1,   *,  1       0
+ SPEC_OMAX1        opt    r8v      3,  1,   *,  3       0 0 0
+ SPEC_OMAX2        opt    r8v      3,  1,   *,  3       0 0 0
+ SPEC_WSRMAX       opt    r8       1,  1,   *,  1       0
+ ... Species 1
+ SPEC_ATOM         reqd   chr      1,  0,   1           Al
+ SPEC_ATOM_Z       reqd   r8       1,  1,   1, --       13
+ SPEC_ATOM_R       reqd   r8       1,  1,   1, --       2.13
+ SPEC_ATOM_A       opt    r8       1,  1,   *,  1       0.015
+ SPEC_ATOM_NR      opt    i4       1,  1,   *,  1       543
+ SPEC_ATOM_LMX     opt    i4       1,  1,   1,  0       3
+ SPEC_ATOM_RSMH    reqd   r8v      4,  4,   3,  1       1.07 1.07 1.07 0
+ SPEC_ATOM_EH      reqd   r8v      4,  3,   3,  1       -1 -1 -1 0
+ SPEC_ATOM_RSMH2   opt    r8v      4,  4,   *,  4       0 0 0 0
+ SPEC_ATOM_LMXA    opt    i4       1,  1,   1,  0       4
+ SPEC_ATOM_LMXL    opt    i4       1,  1,   *,  1       4
+ SPEC_ATOM_P       opt    r8v      5,  1,   *,  5       0 0 0 0 0
+ SPEC_ATOM_Q       opt    r8v      5,  1,   *,  5       0 0 0 0 0
+ DEFPQ, z=13: P=  3.81  3.59  3.24  4.13  5.10
+        z=13: Q=  2.00  1.00  0.00  0.00  0.00
+ DEFPQ, z=13: P=  3.81  3.59  3.24  4.13  5.10
+        z=13: Q=  2.00  1.00  0.00  0.00  0.00
+ SPEC_ATOM_NMCORE  opt    i4       1,  1,   1,  0       1
+ SPEC_ATOM_PZ      opt    r8v      5,  5,   *,  5       0 0 0 0 0
+ SPEC_ATOM_LFOCA   opt    i4       1,  1,   *,  1       1
+ SPEC_ATOM_KMXA    opt    i4       1,  1,   1,  0       5
+ SPEC_ATOM_RSMA    opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RSMG    opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RFOCA   opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RSMFA   opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RS3     opt    r8       1,  1,   *,  1       0.5
+ SPEC_ATOM_IDXDN   opt    i4v      4,  4,   *,  4       1 1 1 1
+ SPEC_ATOM_HCR     opt    r8v      4,  4,   *, --
+ SPEC_ATOM_HCR/R   opt    r8v      4,  4,   *,  4       0.7 0.7 0.7 0.7
+ SPEC_ATOM_IDMOD   opt    i4v      5,  5,   *,  5       0 0 0 0 0
+ SPEC_ATOM_MIX     opt    lg       1,  1,   *,  1       F
+ SPEC_ATOM_CSTRMX  opt    lg       1,  1,   *,  1       F
+ SPEC_ATOM_FRZWF   opt    lg       1,  1,   *,  1       F
+ SPEC_ATOM_IDU     opt    i4v      4,  1,   *,  4       0 0 0 0
+ SPEC_ATOM_UH      opt    r8v      4,  1,   *,  4       0 0 0 0
+ SPEC_ATOM_JH      opt    r8v      4,  1,   *,  4       0 0 0 0
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+ SPEC_ATOM_C-HOLE  opt    chr      1,  0,   *
+ SPEC_ATOM_C-HQ    opt    r8v      2,  2,   *,  2       -1 0
+ SPEC_ATOM_EREF    opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_AMASS   opt    r8       1,  1,   *, --
+ ... Species 2
+ SPEC_ATOM         reqd   chr      1,  0,   1           P
+ SPEC_ATOM_Z       reqd   r8       1,  1,   1, --       15
+ SPEC_ATOM_R       reqd   r8       1,  1,   1, --       2.17
+ SPEC_ATOM_A       opt    r8       1,  1,   *,  1       0.015
+ SPEC_ATOM_NR      opt    i4       1,  1,   *,  1       563
+ SPEC_ATOM_LMX     opt    i4       1,  1,   1,  0       3
+ SPEC_ATOM_RSMH    reqd   r8v      4,  4,   3,  1       1.08 1.08 1.08 0
+ SPEC_ATOM_EH      reqd   r8v      4,  3,   3,  1       -1 -1 -1 0
+ SPEC_ATOM_RSMH2   opt    r8v      4,  4,   *,  4       0 0 0 0
+ SPEC_ATOM_LMXA    opt    i4       1,  1,   1,  0       4
+ SPEC_ATOM_LMXL    opt    i4       1,  1,   *,  1       4
+ SPEC_ATOM_P       opt    r8v      5,  1,   *,  5       0 0 0 0 0
+ SPEC_ATOM_Q       opt    r8v      5,  1,   *,  5       0 0 0 0 0
+ DEFPQ, z=15: P=  3.92  3.78  3.20  4.12  5.10
+        z=15: Q=  2.00  3.00  0.00  0.00  0.00
+ DEFPQ, z=15: P=  3.92  3.78  3.20  4.12  5.10
+        z=15: Q=  2.00  3.00  0.00  0.00  0.00
+ SPEC_ATOM_NMCORE  opt    i4       1,  1,   1,  0       1
+ SPEC_ATOM_PZ      opt    r8v      5,  5,   *,  5       0 0 0 0 0
+ SPEC_ATOM_LFOCA   opt    i4       1,  1,   *,  1       1
+ SPEC_ATOM_KMXA    opt    i4       1,  1,   1,  0       5
+ SPEC_ATOM_RSMA    opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RSMG    opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RFOCA   opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RSMFA   opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_RS3     opt    r8       1,  1,   *,  1       0.5
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+ SPEC_ATOM_IDXDN   opt    i4v      4,  4,   *,  4       1 1 1 1
+ SPEC_ATOM_HCR     opt    r8v      4,  4,   *, --
+ SPEC_ATOM_HCR/R   opt    r8v      4,  4,   *,  4       0.7 0.7 0.7 0.7
+ SPEC_ATOM_IDMOD   opt    i4v      5,  5,   *,  5       0 0 0 0 0
+ SPEC_ATOM_MIX     opt    lg       1,  1,   *,  1       F
+ SPEC_ATOM_CSTRMX  opt    lg       1,  1,   *,  1       F
+ SPEC_ATOM_FRZWF   opt    lg       1,  1,   *,  1       F
+ SPEC_ATOM_IDU     opt    i4v      4,  1,   *,  4       0 0 0 0
+ SPEC_ATOM_UH      opt    r8v      4,  1,   *,  4       0 0 0 0
+ SPEC_ATOM_JH      opt    r8v      4,  1,   *,  4       0 0 0 0
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+ SPEC_ATOM_C-HOLE  opt    chr      1,  0,   *
+ SPEC_ATOM_C-HQ    opt    r8v      2,  2,   *,  2       -1 0
+ SPEC_ATOM_EREF    opt    r8       1,  1,   *,  1       0
+ SPEC_ATOM_AMASS   opt    r8       1,  1,   *, --
+
+ --- Parameters for site data ---
+ ... Site 1
+ SITE_ATOM         reqd   chr      1,  0,   1           Al
+ SITE_ATOM_POS     reqd   r8v      3,  1,   3, --       0 0 0
+ SITE_ATOM_DPOS    opt    r8v      3,  1,   *,  3       0 0 0
+ SITE_ATOM_RELAX   opt    i4v      3,  1,   *,  3       1 1 1
+ SITE_ATOM_AF      opt    i4       1,  1,   *,  1       0
+ ... Site 2
+ SITE_ATOM         reqd   chr      1,  0,   1           P
+ SITE_ATOM_POS     reqd   r8v      3,  1,   3, --       1.355 1.355 1.355
+ SITE_ATOM_DPOS    opt    r8v      3,  1,   *,  3       0 0 0
+ SITE_ATOM_RELAX   opt    i4v      3,  1,   *,  3       1 1 1
+ SITE_ATOM_AF      opt    i4       1,  1,   *,  1       0
+
+ --- Parameters for structure constants ---
+ STR_RMAXS         opt    r8       1,  1,   *, --
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+idu uh jh=   0   0   0   0  0.00  0.00  0.00  0.00   0.00  0.00  0.00  0.00
+ STR_RMAX          opt    r8       1,  1,   *,  1       0
+
+ --- Parameters for Brillouin zone integration ---
+ BZ_GETQP          opt    lg       1,  1,   *,  1       F
+ BZ_NKABC          reqd   i4v      3,  1,   3, --       4 4 4
+ BZ_PUTQP          opt    lg       1,  1,   *,  1       F
+ BZ_BZJOB          opt    i4v      3,  1,   *,  1       0
+ BZ_METAL          opt    i4       1,  1,   1,  0       3
+ BZ_TETRA          opt    lg       1,  1,   *,  1       T
+ BZ_N              opt    i4       1,  1,   *,  1       0
+ BZ_W              opt    r8       1,  1,   *,  1       5e-3
+ BZ_EF0            opt    r8       1,  1,   *,  1       0
+ BZ_DELEF          opt    r8       1,  1,   *,  1       0.05
+ BZ_ZBAK           opt    r8       1,  1,   *,  1       0
+ BZ_SAVDOS         opt    i4       1,  1,   1,  0       1
+ BZ_NPTS           opt    i4       1,  1,   1,  0       2001
+ BZ_DOSMAX         opt    r8       1,  1,   1,  0       1.5
+ BZ_EFMAX          opt    r8       1,  1,   *,  1       5
+ BZ_NEVMX          opt    i4       1,  1,   *,  1       0
+ BZ_NOINV          opt    lg       1,  1,   *,  1       F
+ BZ_FSMOM          opt    r8       1,  1,   *,  1       NULL
+ BZ_FSMOMMETHOD    opt    i4       1,  1,   *,  1       0
+
+ --- Parameters for Ewald sums ---
+ EWALD_AS          opt    r8       1,  1,   *,  1       2
+ EWALD_TOL         opt    r8       1,  1,   *,  1       1e-8
+ EWALD_NKDMX       opt    i4       1,  1,   *,  1       800
+
+ --- Parameters for iterations ---
+ ITER_NIT          opt    i4       1,  1,   1,  0       30
+ ITER_NRMIX        opt    i4v      2,  1,   *,  2       80 2
+ ITER_MIX          opt    chr      1,  0,   1           A2,b=.2,n=3
+ mixing: mode=A  nmix=2  nit=3  beta=.2
+ ITER_CONV         opt    r8       1,  1,   1,  0       1e-5
+ ITER_CONVC        opt    r8       1,  1,   1,  0       1e-5
+ ITER_UMIX         opt    r8       1,  1,   *,  1       1
+ ITER_TOLU         opt    r8       1,  1,   *,  1       0
+
+ --- Parameters for dynamics and statics ---
+ DYN_NIT           opt    i4       1,  1,   *,  1       1
+ DYN_MSTAT         opt    ---                           missing
+  bndfp (warning): no sigm file found ... LDA calculation only
+
+mmm === MTO setting ===
+mmm ispec lmxb lpzex nkapii nkaphh=    1    3    0    1    1
+mmm rsmh1    1  1.07  1.07  1.07  0.00
+mmm   eh1    1 -1.00 -1.00 -1.00  0.00
+mmm rsmh2    1  0.00  0.00  0.00  0.00
+mmm  eh2     1  0.00  0.00  0.00  0.00
+mmm pz       1  0.00  0.00  0.00  0.00
+mmm lh       1  2
+mmm ispec lmxb lpzex nkapii nkaphh=    2    3    0    1    1
+mmm rsmh1    2  1.08  1.08  1.08  0.00
+mmm   eh1    2 -1.00 -1.00 -1.00  0.00
+mmm rsmh2    2  0.00  0.00  0.00  0.00
+mmm  eh2     2  0.00  0.00  0.00  0.00
+mmm pz       2  0.00  0.00  0.00  0.00
+mmm lh       2  2
+
+                Plat                                  Qlat
+   0.000000   2.710000   2.710000       -0.184502   0.184502   0.184502
+   2.710000   0.000000   2.710000        0.184502  -0.184502   0.184502
+   2.710000   2.710000   0.000000        0.184502   0.184502  -0.184502
+  Cell vol= 268.617924
+
+ LATTC:  as= 2.000   tol= 1.00E-08   alat= 1.88973   awald= 0.310
+         r1= 10.045   nkd=  87      q1=  1.026   nkg= 169
+
+ SGROUP: 1 symmetry operations from 0 generators
+ ADDBAS: basis is already complete --- no sites added
+ SYMLAT: Bravais system is cubic with 48 symmetry operations.
+ SYMCRY: crystal invariant under 24 symmetry operations for tol=1e-5
+ ig  group op
+   1  i*i                                
+   2  r3(1,1,-1)                         
+   3  r3(-1,-1,1)                        
+   4  r3d                                
+   5  r3(-1,-1,-1)                       
+   6  r2x                                
+   7  i*r4x                              
+   8  i*r4(-1,0,0)                       
+   9  r3(1,-1,-1)                        
+  10  r3(-1,1,1)                         
+  11  m(1,1,-0)                          
+  12  m(1,-0,-1)                         
+  13  r2y                                
+  14  i*r4y                              
+  15  i*r4(0,-1,0)                       
+  16  m(0,1,-1)                          
+  17  r2z                                
+  18  i*r4(0,0,-1)                       
+  19  i*r4z                              
+  20  r3(-1,1,-1)                        
+  21  r3(1,-1,1)                         
+  22  m(1,0,1)                           
+  23  m(1,-1,0)                          
+  24  m(-0,1,1)                          
+ GROUPG: the following are sufficient to generate the space group:
+ Generator(cart): i*r4x r3(1,1,-1)
+ Generator(frac): i*r4x r3(1,1,-1)
+ MKSYM:  found 24 space group operations; adding inversion generated 48 ops
+ 
+ BZMESH:      8 irreducible QP from    4   4   4 shift=FFF
+
+ MSHSIZ: mesh has 24 x 24 x 24 divisions; length 0.302, 0.302, 0.302
+         generated from gmax = 12.0 a.u. : 7799 vectors of 13824 (56%)
+
+ GVLST2: gmax = 12.0 a.u. created 7799 vectors of 13824 (56%)
+         (input) mesh has 24 x 24 x 24 divisions; length 0.302, 0.302, 0.302
+ end of reading rst or atm
+ SGVSYM: 439 symmetry stars found for 7799 reciprocal lattice vectors
+
+ sugcut:  make orbital-dependent reciprocal vector cutoffs for tol= 1.00E-06
+ spec      l    rsm    eh     gmax    last term    cutoff
+  Al       0*   1.07  -1.00   6.948    1.03E-06    1471 
+  Al       1*   1.07  -1.00   7.435    1.35E-06    1837 
+  Al       2    1.07  -1.00   7.920    1.31E-06    2229 
+  P        0*   1.08  -1.00   6.883    1.37E-06    1459 
+  P        1*   1.08  -1.00   7.364    1.01E-06    1837 
+  P        2    1.08  -1.00   7.842    1.05E-06    2133 
+ end of reading rst or atm
+ m_qplistinit:start
+m_qplist_qspdivider: rank,(iqini,ispini),(iqend,ispend)=    1, (    3 1),  (    4 1)
+ goto end of reading rst or atm           0
+m_qplist_qspdivider: rank,(iqini,ispini),(iqend,ispend)=    0, (    1 1),  (    2 1)
+ goto end of reading rst or atm           0
+
+ iors  : read restart file (binary, mesh density) 
+ iors  : empty file ... nothing read
+
+ rdovfa: read and overlap free-atom densities (mesh density) ...
+ end of reading rst or atm
+m_qplist_qspdivider: rank,(iqini,ispini),(iqend,ispend)=    2, (    5 1),  (    6 1)
+ goto end of reading rst or atm           0
+ end of reading rst or atm
+m_qplist_qspdivider: rank,(iqini,ispini),(iqend,ispend)=    3, (    7 1),  (    8 1)
+ goto end of reading rst or atm           0
+ rdovfa: expected Al,      read Al       with rmt=  2.1300  mesh   543  0.015
+ rdovfa: expected P,       read P        with rmt=  2.1700  mesh   563  0.015
+
+ ovlpfa: overlap smooth part of FA densities
+ total smooth Q = 8.986826
+
+ Free atom and overlapped crystal site charges:
+   ib    true(FA)    smooth(FA)  true(OV)    smooth(OV)    local
+    1    0.963680    1.048457    1.278020    1.362797   -0.084777
+    2    2.860229    3.762278    3.199227    4.101276   -0.902048
+
+ Smooth charge on mesh:            8.986826
+ Sum of local charges:            -0.986826
+ Total valence charge:             8.000000
+ Sum of core charges:             20.000000
+ Sum of nuclear charges:         -28.000000
+ Homogeneous background:           0.000000
+ Deviation from neutrality:        0.000000
+ end of reading rst or atm
+
+ species data:  augmentation                           density
+ spec       rmt   rsma lmxa kmxa      lmxl     rg   rsmv  kmxv foca   rfoca
+ Al       2.130  0.852    4    5         4  0.532  1.065    15    1   0.852
+ P        2.170  0.868    4    5         4  0.542  1.085    15    1   0.868
+
+ Basis, after reading restart file
+ site spec        pos (Cartesian coordinates)         pos (multiples of plat)
+   1  Al        0.000000   0.000000   0.000000    0.000000   0.000000   0.000000
+   2  P         1.355000   1.355000   1.355000    0.250000   0.250000   0.250000
+
+ --- BNDFP:  begin iteration 1 of 30
+ end of reading rst or atm
+ end of reading rst or atm
+ end of reading rst or atm
+ esmsmves: ESM is not turned on, you need esm_input.dat for ESM mode
+ smves:: avg es pot at rmt= 0.123206  avg sphere pot= 0.136067  vconst=-0.123206
+
+ smooth rhoves     31.997470   charge     8.986826
+ smvxcm: all smrho_w is positive
+ smooth rhoeps =   -6.212881   rhomu =   -8.113149  avg vxc =   -0.696211 
+
+ locpot:
+
+ site  1  z= 13.0  rmt= 2.13000  nr=543   a=0.015  nlml=25  rg=0.532  Vfloat=T
+ sm core charge = 0.337283 (sphere) + 0.007361 (spillout) = 0.344644
+ potential shift to crystal energy zero:    0.000006
+
+ site  2  z= 15.0  rmt= 2.17000  nr=563   a=0.015  nlml=25  rg=0.542  Vfloat=T
+ sm core charge = 0.028295 (sphere) + 0.00036 (spillout) = 0.028655
+ potential shift to crystal energy zero:    0.000044
+
+ Energy terms:             smooth           local           total
+   rhoval*vef            -18.306489        -7.448279       -25.754769
+   rhoval*ves             -1.690034       -16.485436       -18.175470
+   psnuc*ves              65.684974     -4557.490533     -4491.805558
+   utot                   31.997470     -2286.987984     -2254.990514
+   rho*exc                -6.212881       -73.313729       -79.526609
+   rho*vxc                -8.113149       -96.951766      -105.064914
+   valence chg             8.986826        -0.986826         8.000000
+   core charge            20.000000        -0.000000        20.000000
+
+ Charges:  valence     8.00000   cores    20.00000   nucleii   -28.00000
+    hom background     0.00000   deviation from neutrality:      0.00000
+  m_bandcal_init: start
+ bndfp: kpt     1 of     8 k=  0.0000  0.0000  0.0000 ndimh = nmto+napw =    18   18    0
+ bndfp: kpt     2 of     8 k= -0.0461  0.0461  0.0461 ndimh = nmto+napw =    18   18    0
+ ... Done MPI k-loop: elapsed time=   0.0423
+
+ BZWTS : --- Tetrahedron Integration ---
+ ... only filled or empty bands encountered:  ev=0.215003  ec=0.612832
+ VBmax = 0.215003  CBmin = 0.612832  gap = 0.397829 Ry = 5.41278 eV
+ BZINTS: Fermi energy:      0.215003;   8.000000 electrons
+         Sum occ. bands:   -0.649134, incl. Bloechl correction:  0.000000
+Generating TDOS: efermi, and dos window=    0.2150  -0.6673   1.7150
+ bndfp: kpt    1 of    8 k isp=  0.0000  0.0000  0.0000 1 ndimh nev=   18   14
+ -0.6573  0.2150  0.2150  0.2150  0.6510  0.7465  0.7465  0.7465  1.0807
+  1.0807  1.6937  1.6937  1.6937  2.2373
+ bndfp: kpt    2 of    8 k isp= -0.0461  0.0461  0.0461 1 ndimh nev=   18   14
+ -0.6108  0.0403  0.1944  0.1944  0.6457  0.7966  0.7966  0.9677  1.1038
+  1.1038  1.6350  1.6790  1.6790  2.1271
+ bndfp: kpt    3 of    8 k isp= -0.0923  0.0923  0.0923 1 ndimh nev=   18   14
+ -0.5472 -0.1050  0.1773  0.1773  0.6247  0.8111  0.8111  1.2481  1.2481
+  1.2761  1.4638  1.5208  1.5208  2.0849
+ bndfp: kpt    4 of    8 k isp=  0.0000  0.0000  0.0923 1 ndimh nev=   18   14
+ -0.5950  0.0405  0.1585  0.1585  0.6407  0.8256  0.9023  0.9023  1.0906
+  1.1890  1.5871  1.5871  1.8521  2.0043
+ bndfp: kpt    5 of    8 k isp= -0.0461  0.0461  0.1384 1 ndimh nev=   18   14
+ -0.5295 -0.0799  0.0938  0.1433  0.6696  0.8634  0.9530  0.9852  1.2652
+  1.3059  1.4530  1.5158  1.7994  1.9229
+ bndfp: kpt    6 of    8 k isp= -0.0923  0.0923  0.1845 1 ndimh nev=   18   14
+ -0.5523 -0.0451  0.0880  0.1750  0.6882  0.8792  0.8841  1.0210  1.0755
+  1.2802  1.4836  1.6716  1.7399  1.9565
+ bndfp: kpt    7 of    8 k isp=  0.0000  0.0000  0.1845 1 ndimh nev=   18   14
+ -0.5065 -0.1113  0.1157  0.1157  0.6128  0.7380  1.1396  1.1396  1.3737
+  1.3737  1.3895  1.4683  1.5538  1.7331
+ bndfp: kpt    8 of    8 k isp= -0.0000  0.0923  0.1845 1 ndimh nev=   18   14
+ -0.5045 -0.0910  0.0681  0.0969  0.7404  0.8933  0.9510  1.0082  1.1678
+  1.3487  1.4714  1.5901  1.7977  1.9172
+  mmmmm m_bandcal_2nd
+
+ mkrout:  Qtrue      sm,loc       local
+   1    1.354813    2.727296   -1.372483
+   2    4.654839    7.759983   -3.105144
+
+ Symmetrize density..
+                qbyl        hbyl        ebar   
+ib=  1 l= 0    0.604498   -0.084105   -0.139132
+ib=  1 l= 1    0.605698    0.027860    0.045997
+ib=  1 l= 2    0.134975    0.006071    0.044979
+ib=  1 l= 3    0.007144   -0.000567   -0.079364
+ib=  1 l= 4    0.002498   -0.000042   -0.016678
+ -----------------------------------------------
+ib=  2 l= 0    1.418397   -0.744276   -0.524730
+ib=  2 l= 1    3.175308    0.290634    0.091529
+ib=  2 l= 2    0.058400    0.002894    0.049553
+ib=  2 l= 3    0.001695   -0.000190   -0.111859
+ib=  2 l= 4    0.001038    0.000032    0.031166
+ -----------------------------------------------
+
+ Make new boundary conditions for phi,phidot..
+  pnunew: ebar: 
+    without lo    : ebar = center of gravity of occupied states
+    with lo & PZ>P: ebar for lo is meaningless(zero is shown). Use empty-sphere PZ.
+                    ebar for valence is at the center of gravity of occ. states.
+    with lo & PZ<P: ebar for lo is by atomic calculation phidx for given PZ
+                    ebar for valence is at the Fermi energy.
+  idmod=0-> If P=prty(fractional part is log.-derivative)<pfeee, we use pfree.
+
+ site    1   species   1:Al      
+ l  idmod     ql         ebar        pold        ptry        pfree        pnew
+ 0     0    0.604498   -0.139132    3.810000    3.721726    3.500000    3.721726
+ 1     0    0.605698    0.045997    3.590000    3.508249    3.250000    3.508249
+ 2     0    0.134975    0.044979    3.240000    3.250993    3.147584    3.250993
+ 3     0    0.007144   -0.079364    4.130000    4.122393    4.102416    4.122393
+ 4     0    0.002498   -0.016678    5.100000    5.086568    5.077979    5.086568
+
+ site    2   species   2:P       
+ l  idmod     ql         ebar        pold        ptry        pfree        pnew
+ 0     0    1.418397   -0.524730    3.920000    3.852293    3.500000    3.852293
+ 1     0    3.175308    0.091529    3.780000    3.797874    3.250000    3.797874
+ 2     0    0.058400    0.049553    3.200000    3.307115    3.147584    3.307115
+ 3     0    0.001695   -0.111859    4.120000    4.126225    4.102416    4.126225
+ 4     0    0.001038    0.031166    5.100000    5.088665    5.077979    5.088665
+
+ Harris energy:
+ sumev=       -0.649134  val*vef=     -25.754769   sumtv=      25.105635
+ sumec=        0.000000  cor*vef=       0.000000   ttcor=    1144.140127
+ rhoeps=     -79.526609     utot=   -2254.990514    ehar=   -1165.271361
+
+ srhov:    -39.563992      2.302116    -37.261876 sumev=   -0.649134   sumtv=   36.612742
+ esmsmves: ESM is not turned on, you need esm_input.dat for ESM mode
+ smves:: avg es pot at rmt= 0.312253  avg sphere pot= 0.087441  vconst=-0.312253
+
+ smooth rhoves     45.855517   charge    12.477627
+ smvxcm: all smrho_w is positive
+ smooth rhoeps =  -11.570630   rhomu =  -15.144876  avg vxc =   -0.638978 
+
+ locpot:
+
+ site  1  z= 13.0  rmt= 2.13000  nr=543   a=0.015  nlml=25  rg=0.532  Vfloat=F
+ sm core charge = 0.337283 (sphere) + 0.007361 (spillout) = 0.344644
+
+ site  2  z= 15.0  rmt= 2.17000  nr=563   a=0.015  nlml=25  rg=0.542  Vfloat=F
+ sm core charge = 0.028295 (sphere) + 0.00036 (spillout) = 0.028655
+
+ Energy terms:             smooth           local           total
+   rhoval*vef            -41.816663         6.498443       -35.318221
+   rhoval*ves             15.629132       -41.730663       -26.101531
+   psnuc*ves              76.081902     -4579.034304     -4502.952402
+   utot                   45.855517     -2310.382483     -2264.526966
+   rho*exc               -11.570630       -69.402473       -80.973103
+   rho*vxc               -15.144876       -91.829693      -106.974569
+   valence chg            12.477627        -4.477627         8.000000
+   core charge            20.000000        -0.000000        20.000000
+
+ Charges:  valence     8.00000   cores    20.00000   nucleii   -28.00000
+    hom background     0.00000   deviation from neutrality:      0.00000
+
+ Kohn-Sham energy:
+ sumtv=       36.612742  sumtc=      1144.140127   ekin=     1180.752869
+ rhoep=      -80.973103   utot=     -2264.526966   ehks=    -1164.747200
+  
+ mixing: mode=A  nmix=2  it 1 of 3  beta=.2
+ mixrealsmooth= T
+ wgtsmooth=   8.5051727179971462E-003
+ mixrho:  sought 2 iter from file mixm; read 0.  RMS DQ=4.31e-2
+ AMIX: nmix=0 mmix=8  nelts= 16936  beta=0.20000  tm= 5.00000  rmsdel= 4.31D-02
+ mixrho: add corrections to qcell smrho = -0.14831D-07 -0.55212D-10
+
+   it  1  of 30    ehf=   -1165.271361   ehk=   -1164.747200
+h ehf(eV)=-15854.4490889 ehk(eV)=-15847.3174584 sev(eV)=-8.8319831
+Exit 0 lmf-MPIK : exit (--quit=band)
+CPU time:    0.455s     Fri May 13 00:05:38 2022   on 

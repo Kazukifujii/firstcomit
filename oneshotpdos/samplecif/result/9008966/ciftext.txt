@@ -1,0 +1,51 @@
+None
+CIF2CELL 1.2.10
+2022-05-13 0:06
+Output for GaS
+CIF file exported from Chemical Abstracts.
+Database reference code: None.
+
+ BIBLIOGRAPHIC INFORMATION
+Wyckoff, R. W. G., Crystal Structures 1, 85-237 (1963) 
+
+ INPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 194
+Hall symbol            : -P 6c 2c
+Hermann-Mauguin symbol : P63/mmc
+
+Lattice parameters:
+          a           b           c 
+  3.5850000   3.5850000  15.5000000 
+      alpha        beta       gamma 
+ 90.0000000  90.0000000 120.0000000 
+Representative sites :
+Atom           a1          a2          a3 
+Ga      0.3333300   0.6666700   0.1700000
+S       0.3333300   0.6666700   0.6000000
+
+ OUTPUT CELL INFORMATION
+Symmetry information:
+Hexagonal crystal system.
+Space group number     : 194
+Hall symbol            : -P 6c 2c
+Hermann-Mauguin symbol : P63/mmc
+
+Bravais lattice vectors :
+  0.8660254  -0.5000000   0.0000000 
+  0.0000000   1.0000000   0.0000000 
+  0.0000000   0.0000000   4.3235704 
+All sites, (lattice coordinates):
+Atom           a1          a2          a3 
+Ga      0.3333333   0.6666667   0.1700000
+Ga      0.6666667   0.3333333   0.6700000
+Ga      0.3333333   0.6666667   0.3300000
+Ga      0.6666667   0.3333333   0.8300000
+S       0.3333333   0.6666667   0.6000000
+S       0.6666667   0.3333333   0.1000000
+S       0.3333333   0.6666667   0.9000000
+S       0.6666667   0.3333333   0.4000000
+
+Unit cell volume  : 172.5204768 A^3
+Unit cell density :   2.3600793 u/A^3 =  26.4467438 g/cm^3
