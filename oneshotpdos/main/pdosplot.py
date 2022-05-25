@@ -67,7 +67,6 @@ def sumpdos(dir,ciflist,orbital='s',indexnumber=None):
 def savepdos(cifdir,orbital=list(range(1,6)),fig_name=str(),key='dos.isp1.site001.tmp'):
     """sample
 import  functions as fs
-from comparsion import comparsion_pdos_in_directory
 import re
 import os,shutil
 

@@ -80,83 +80,8 @@ def set_pdosdata(directory):
         '''
         if not os.path.isdir(directory):
             print(directory+" dose no exist")
+            return
         files=glob.glob(directory+'/dos.isp1.site*')
-        result=list()
-        for i in files:
-                result.append(re.search(r"([^/]*?)$",i).group())
-        #df=pd.read_csv(directory+'/'+result[0],header=None,index_col=0,comment='#',delim_whitespace=True)
-        dict_df=dict()
-        for s in result:
-            dict_df[s]=pd.read_csv(directory+'/'+s,header=None,index_col=0,comment='#',delim_whitespace=True)
-        return dict_df
-
-def savepdos(cifdir,orbital=list(range(1,6)),fig_name=str(),key='dos.isp1.site001.tmp'):
-    """sample
-import  functions as fs
-from comparsion import comparsion_pdos_in_directory
-import re
-import os,shutil
-
-from readinfo import setcifdata
-#parsing ciffiles in the direcoty
-#there result direcoty
-cifdir='/home/fujikazuki/ciflist_test'
-ciflist=[s.replace('\n','') for s in open(cifdir+'/cif_list.txt').readlines()]
-
-try:
-    os.mkdir(cifdir+'/pdospng')
-except:
-    shutil.rmtree(cifdir+'/pdospng')
-    os.mkdir(cifdir+'/pdospng')
-os.chdir(cifdir+s')
-
-cifdatas=[setcifdata(s) for s in ciflist]
-
-for cifdata in cifdatas:
-    os.mkdir(cifdata.cifnumber)
-    os.chdir(cifdata.cifnumber)
-    for j in range(len(cifdata.allsite)):
-        figname=cifdata.formular+str(cifdata.allsite[j])
-        key='dos.isp1.site{0:03d}.tmp'.format(j+1)
-        for i in range(1,4):
-            fs.savepdos(cifdir+'/result'+'/'+cifdata.cifnumber,orbital=[i],fig_name=figname,key=key)
-    os.chdir('..')
-    """
-    plt.clf()
-    if not fig_name:
-        fig_name=re.search(r"([^/]*?)$",cifdir).group()
-    try:
-        pdosdic=set_pdosdata(cifdir)
-        print(key)
-        pdosdf=pdosdic[key]
-    except:
-        print('No data '+fig_name)
-        return
-    r=13.605
-    pdosdf.index=pdosdf.index*r
-    realpdosdf=pd.DataFrame(columns=orbital,index=pdosdf.index).fillna(0)
-    ls=list()
-    for i in orbital:
-        anl=int(0.5*i*((i-1)*2+2))
-        anf=int(0.5*(i-1)*((i-2)*2+2)+1)
-        for j in range(anf,anl+1):
-            realpdosdf[i]=pdosdf[j]/r+realpdosdf[i]
-            ls.append(j)
-        realpdosdf[i].plot()
-    for i in range(len(orbital)):
-        I=orbital[i]
-        if I==1:
-            orbital[i]='s'
-        elif I==2:
-            orbital[i]='p'
-        elif I==3:
-            orbital[i]='d'
-        elif I==4:
-            orbital[i]='f'
-    plt.ylim([0,5])
-    plt.xlim([-20,20])
-    plt.grid()
-    plt.legend(orbital)
-    titile=fig_name+'_'+re.sub("\[|\]|'|","",str(orbital))
-    plt.title(titile)
-    plt.savefig(titile+'.png')
+        files=[re.search(r"([^/]*?)$",s).group() for s in files]
+        result={key:pd.read_csv(directory+'/'+key,header=None,index_col=0,comment='#',delim_whitespace=True) for key in files}
+        return result
