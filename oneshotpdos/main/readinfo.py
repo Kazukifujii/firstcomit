@@ -63,8 +63,10 @@ class setcifdata():
         print(cifdata[i].allsite)
     """
     def __init__(self,ciffile):
+        self.cifadress=ciffile
         self.cifnumber=re.search(r"([^/]*?)$",ciffile.strip()).group().replace('.cif','')
-        atomsitefile=ciffile.replace(self.cifnumber+'.cif','')+'result/'+self.cifnumber+'/SiteInfo.lmchk'
+        self.resultadress=ciffile.replace(self.cifnumber+'.cif','')+'result/'+self.cifnumber
+        atomsitefile=self.resultadress+'/SiteInfo.lmchk'
         if os.path.isfile(atomsitefile):
             self.allsite=siteinfo(atomsitefile)
         else:
@@ -75,3 +77,4 @@ class setcifdata():
         else:
             print('No such file is '+ciffile)
             self.formular=None
+        

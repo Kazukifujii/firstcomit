@@ -117,3 +117,5 @@ for cifdata in cifdatas:
     titile=fig_name+'_'+re.sub("\[|\]|'|","",str(orbital))
     plt.title(titile)
     plt.savefig(titile+'.png')
+
+
