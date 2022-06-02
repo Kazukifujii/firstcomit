@@ -1,33 +1,37 @@
-import os,shutil
-from gaussisanfilter import pdosfilter
+import pdosfilter as pf
+import functions as fn
 from readinfo import setcifdata
-import numpy as np
-#parsing ciffiles in the direcoty
-#there result direcoty
-cifdir='/home/fujikazuki/gaustest'
-ciflist=[s.replace('\n','') for s in open(cifdir+'/cif_list.txt').readlines()]
-for sigma in np.arange(0.01,10,0.01):
-    pngdir=cifdir+'/gausupdos_'+str(sigma)
-    try:
-        os.mkdir(pngdir)
-    except:
-        shutil.rmtree(pngdir)
-        os.mkdir(pngdir)
-    os.chdir(pngdir)
+import pandas as pd
+import matplotlib.pyplot as plt
 
-    cifdatas=[setcifdata(s) for s in ciflist]
-    for cifdata in cifdatas:
-        if cifdata.allsite!=None:
-            print('start '+cifdata.cifnumber+' '+str(sigma))
-            os.mkdir(cifdata.cifnumber)
-            os.chdir(cifdata.cifnumber)
-            pdosdata=pdosfilter(cifdata.resultadress)
-            key=list(pdosdata.afterpdosdata.keys())
-            pdosdata.gaussianfilter(sigma=sigma)
-            for j in range(len(cifdata.allsite)):
-                figname=cifdata.formular+str(cifdata.allsite[j])
-                key='dos.isp1.site{0:03d}.tmp'.format(j+1)
-                for i in range(1,4):
-                    pdosdata.savepdos(orbital=[i],fig_name=figname,key=key)
-            print('end \n')
-            os.chdir('..')
+cifdir='/home/fujikazuki/gaustest'
+resultdir=cifdir+'/orbital_p_gausianfilter'
+
+ciflist=[s.replace('\n','') for s in open(cifdir+'/cif_list.txt').readlines()]
+cifdatas=[setcifdata(s) for s in ciflist]
+
+orbital=[2]
+piccifdata=cifdatas[2]
+pdosdata=pf.pdosfilter(piccifdata.resultadress)
+"""
+pkeys=list(pdosdata.rawpdosdata.keys())
+xval=pdosdata.rawpdosdata[pkeys[0]].index.to_list()
+ykeys=[str(s[1]) for i,s in enumerate(piccifdata.specsite)]
+all_p_pdos=pd.DataFrame(index=xval,columns=ykeys)
+orbital=2
+pdosdata.gaussianfilter(sigma=0.09)
+for i,s in enumerate(ykeys):
+    sitenumber=int(piccifdata.specsite[i][0])
+    all_p_pdos[s][:]=pdosdata.afterpdosdata['dos.isp1.site{0:03d}.tmp'.format(sitenumber)].loc[:,orbital]
+all_p_pdos.plot()
+"""
+import os,shutil
+try:
+    os.mkdir(cifdir+'/testsameorbital')
+except:
+    shutil.rmtree(cifdir+'/testsameorbital')
+    os.mkdir(cifdir+'/testsameorbital')
+os.chdir(cifdir+'/testsameorbital')
+pdosdata.gaussianfilter(sigma=1.0)
+title=piccifdata.formular
+pdosdata.savepdos_sameorbital(piccifdata.specsite,fig_name=title,orbital=[2])

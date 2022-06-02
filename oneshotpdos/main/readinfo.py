@@ -23,8 +23,13 @@ def formularinfo(file):
     print('no formula data '+re.search(r"([^/]*?)$",file.strip()).group().replace('.cif',''))
     return None
 
-    #linens=s.replace('\n','') for s in open(file).readlines()
-    return
+def specinfo(file):
+    #[site number,[siteinfo]]
+    linens=[re.sub(' {2,}','/',s.replace('\n','')).split('/') for s in open(file).readlines()]
+    relist=dict()
+    for s in linens:
+        relist[s[2]]=[s[1],[s[3],(s[5],s[6],s[7])]]
+    return [s for s in relist.values()]
 
 
 def listupAllsite(dir):
@@ -69,6 +74,7 @@ class setcifdata():
         atomsitefile=self.resultadress+'/SiteInfo.lmchk'
         if os.path.isfile(atomsitefile):
             self.allsite=siteinfo(atomsitefile)
+            self.specsite=specinfo(atomsitefile)
         else:
             print('No such file is'+atomsitefile)
             self.allsite=None
