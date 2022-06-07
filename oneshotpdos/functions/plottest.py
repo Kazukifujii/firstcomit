@@ -8,6 +8,7 @@ from pdosfilter import pdosfilter as pf
 cifdir='/home/fujikazuki/gaustest'
 ciflist=[s.replace('\n','') for s in open(cifdir+'/cif_list.txt').readlines()]
 cifdatas=[setcifdata(s) for s in ciflist]
+
 try:
     os.mkdir(cifdir+'/p_orbital_pdos')
 except:
@@ -32,6 +33,7 @@ for cifdata in cifdatas:
 import numpy as np
 
 for sigma in np.arange(0.05,1,0.05):
+    
     print('sigma=',sigma)
     try:
         os.mkdir("sigma="+str(sigma))
@@ -54,3 +56,4 @@ for sigma in np.arange(0.05,1,0.05):
             pdosdata.savepdos_sameorbital(cifdata.specsite,fig_name=title,orbital=[1,2,3],outputcsv=True)
             os.chdir('..')
     os.chdir('..')
+    break
