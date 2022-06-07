@@ -1,4 +1,4 @@
-import  functions as fs
+import  makepdos as mp
 import re,os,shutil
 from readinfo import setcifdata
 import pdosplot as pdosp
@@ -10,7 +10,7 @@ cifdir='/samplecif'
 #cifdir='~/sampletcif'
 
 #fs.make_pdos_in_di(cifdir)
-fs.listup_cif(cifdir)
+mp.listup_cif(cifdir)
 ciflist=[s.replace('\n','') for s in open(cifdir+'/cif_list.txt').readlines()]
 
 

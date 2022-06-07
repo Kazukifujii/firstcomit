@@ -1,10 +1,9 @@
 from operator import index
-import os,glob,re,sys
+import os,glob,re
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from readinfo import setcifdata
-from functions import set_pdosdata
+from readinfo import setcifdata,set_pdosdata
 import pandas as pd
 
 from readinfo import setcifdata
@@ -64,7 +63,6 @@ def sumpdos(dir,ciflist,orbital='s',indexnumber=None):
 
 def savepdos(cifdir,orbital=list(range(1,6)),fig_name=str(),key='dos.isp1.site001.tmp'):
     """sample
-import  functions as fs
 import re
 import os,shutil
 

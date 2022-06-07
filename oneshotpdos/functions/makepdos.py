@@ -1,8 +1,6 @@
-import os,sys,subprocess,logging,glob
+import os,sys,subprocess,glob
 import shutil
-import itertools
 import re
-import pandas as pd
 import matplotlib.pyplot as plt
 
 def pdos_ecalj(cif_name):
@@ -37,17 +35,9 @@ def listup_cif(directory):
         f.write('\n'.join(files))
     return
 
-def cif_conbination(cif_dir):
-    cif_list_txt=cif_dir+'/cif_list.txt'
-    if not os.path.isfile(cif_list_txt):
-        listup_cif(cif_dir)
-    with open(cif_list_txt,mode='r') as f:
-            ciflist=[re.search(r"([^/]*?)$",s.strip()).group() for s in f.readlines()]
-    return list(itertools.combinations(ciflist,2))
-
 def make_pdos_in_di(cif_directory):
     '''sample program
-    make_pdos_in_di('~/cif_list')
+    make_pdos_in_di('~/Directory where cif files are grouped together')
     '''
     get_now_directory=os.getcwd()
     listup_cif(cif_directory)
@@ -72,26 +62,3 @@ def make_pdos_in_di(cif_directory):
         except:
             print('error in for cif')
     os.chdir(get_now_directory)
-
-def set_pdosdata(directory):
-        '''sample
-        dir='~/ciflist/result/1528444'
-        dict_df=set_pdosdata(dir)
-        '''
-        if not os.path.isdir(directory):
-            print(directory+" dose no exist")
-            return
-        files=glob.glob(directory+'/dos.isp1.site*')
-        files=[re.search(r"([^/]*?)$",s).group() for s in files]
-        opdosdic={key:pd.read_csv(directory+'/'+key,header=None,index_col=0,comment='#',delim_whitespace=True) for key in files}
-        r=13.605
-        orbital=list(range(1,6))
-        realpdosdic={key:pd.DataFrame(columns=orbital,index=opdosdic[key].index*r).fillna(0) for key in files}
-        for k,key in enumerate(opdosdic):
-            opdosdic[key].index=opdosdic[key].index*r
-            for i in orbital:
-                anl=int(0.5*i*((i-1)*2+2))
-                anf=int(0.5*(i-1)*((i-2)*2+2)+1)
-                for j in range(anf,anl+1):
-                    realpdosdic[key][i]+=opdosdic[key][j]/r
-        return realpdosdic

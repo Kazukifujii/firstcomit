@@ -1,7 +1,5 @@
 import pdosfilter as pf
-import functions as fn
 from readinfo import setcifdata
-import pandas as pd
 import matplotlib.pyplot as plt
 
 cifdir='/home/fujikazuki/gaustest'

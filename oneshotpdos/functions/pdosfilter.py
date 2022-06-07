@@ -1,6 +1,4 @@
-from turtle import colormode
-from functions import set_pdosdata
-from readinfo import setcifdata
+from readinfo import set_pdosdata
 import matplotlib.pyplot as plt
 import math
 import pandas as pd
@@ -50,7 +48,6 @@ class pdosfilter:
     def gaussianfilter(self,sigma):
         """
         import pdosfilter as pf
-        import functions as fn
         from readinfo import setcifdata
         import numpy as np
         import os,shutil,time
