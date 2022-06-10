@@ -4,22 +4,25 @@ import math
 import pandas as pd
 import numpy as np
 from constant import element_group,colordata
+from readinfo import set_sameorbital,setcifdata
 
 def gausfunc(x,sigma):
         return pow(2*math.pi*sigma**2,-0.5)*math.exp(-(x**2)/(2*sigma**2))
 
 
-class pdosfilter:
+class PdosFilter:
     """sample
-    ciffile='~/ciflist/result/9008862
-    cpdos=pdosfilter(ciffile)
+    ciffile='~/ciflist/9008862.cif
+    cpdos=PdosFilter(ciffile)
     """
-    def __init__(self,resultdir):
-        self.rawpdosdata=set_pdosdata(resultdir)
-        self.afterpdosdata=set_pdosdata(resultdir)
-        self.pkeys=list(self.rawpdosdata.keys())
-        self.xdata=self.rawpdosdata[self.pkeys[0]].index.to_list()
-
+    def __init__(self,cifadress):
+        self.cifdata=setcifdata(cifadress)
+        if  self.cifdata.allsite!=None:
+            self.rawpdosdata=set_pdosdata(self.cifdata.resultadress)
+            self.afterpdosdata=set_pdosdata(self.cifdata.resultadress)
+            self.pkeys=list(self.rawpdosdata.keys())
+            self.xdata=self.rawpdosdata[self.pkeys[0]].index.to_list()
+            self.sameorbital_pdos=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=self.afterpdosdata)
     
     def savepdos(self,orbital=list(range(1,6)),fig_name=str(),key='dos.isp1.site001.tmp'):
         plt.clf()
@@ -45,6 +48,7 @@ class pdosfilter:
         plt.title(titile)
         plt.savefig(titile+'.png')
         plt.close()
+    
     def gaussianfilter(self,sigma):
         """
         import pdosfilter as pf
@@ -111,18 +115,9 @@ class pdosfilter:
                    self.afterpdosdata[key][j][k]=r[l]*dx
 
     def savepdos_sameorbital(self,specdata,orbital=list(range(1,6)),fig_name=str(),outputcsv=False):
-        """sample(site number,[site element,(position)])
+        """sample specdata=[site number,[site element,(position)]]
         specdata=[['2', ['Cd', ('2.387228', '0.000000', '3.374500')]], ['4', ['S', ('2.387228', '0.000000', '5.972865')]]]
         """
-        ykeys=[str(s[1]) for i,s in enumerate(specdata)]
-        self.sameorbital_pdos=dict()
-        for o in orbital:
-            empty_pdos=pd.DataFrame(index=self.xdata,columns=ykeys)
-            for i,s in enumerate(ykeys):
-                sitenumber=int(specdata[i][0])
-                empty_pdos[s][:]=self.afterpdosdata['dos.isp1.site{0:03d}.tmp'.format(sitenumber)].loc[:,o]
-            self.sameorbital_pdos[str(o)]=empty_pdos
-        
         atomlist=[(str(i[1]),element_group[i[1][0]]) for i in specdata]
         atomlist.sort(key = lambda x: x[1])
         colordict={key:colordata[i] for i,(key,_) in enumerate(atomlist)}

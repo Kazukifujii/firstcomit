@@ -109,3 +109,19 @@ def set_pdosdata(directory):
                 for j in range(anf,anl+1):
                     realpdosdic[key][i]+=opdosdic[key][j]/r
         return realpdosdic
+
+def set_sameorbital(specdata,pdosdata):
+    """sample specdata=[site number,[site element,(position)]]
+    specdata=[['2', ['Cd', ('2.387228', '0.000000', '3.374500')]], ['4', ['S', ('2.387228', '0.000000', '5.972865')]]]
+    """
+    pkeys=list(pdosdata.keys())
+    xdata=pdosdata[pkeys[0]].index.to_list()
+    ykeys=[str(s[1]) for i,s in enumerate(specdata)]
+    sameorbital_pdos=dict()
+    for o in list(range(1,6)):
+        empty_pdos=pd.DataFrame(index=xdata,columns=ykeys)
+        for i,s in enumerate(ykeys):
+            sitenumber=int(specdata[i][0])
+            empty_pdos[s][:]=pdosdata['dos.isp1.site{0:03d}.tmp'.format(sitenumber)].loc[:,o]
+        sameorbital_pdos[str(o)]=empty_pdos
+    return  sameorbital_pdos
