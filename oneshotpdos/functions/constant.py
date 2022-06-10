@@ -20,3 +20,5 @@ element_group=dict()
 for d in d_swap:
     element_group.update(d)
 colordata=['r','b']
+
+ORBITAL=['s','p','d','f','g']

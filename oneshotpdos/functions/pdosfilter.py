@@ -30,16 +30,6 @@ class PdosFilter:
         pdosdf=pdosdic[key]
         for i in orbital:
             pdosdf[i].plot()
-        for i in range(len(orbital)):
-            I=orbital[i]
-            if I==1:
-                orbital[i]='s'
-            elif I==2:
-                orbital[i]='p'
-            elif I==3:
-                orbital[i]='d'
-            elif I==4:
-                orbital[i]='f'
         plt.ylim([0,5])
         plt.xlim([-20,40])
         plt.grid()
@@ -124,14 +114,6 @@ class PdosFilter:
         for i,val in enumerate(orbital):
             plt.clf()
             self.sameorbital_pdos[str(val)].plot(color=colordict)
-            if val==1:
-                orbital[i]='s'
-            elif val==2:
-                orbital[i]='p'
-            elif val==3:
-                orbital[i]='d'
-            elif val==4:
-                orbital[i]='f'
             plt.ylim([0,5])
             plt.xlim([-20,40])
             plt.grid()
