@@ -23,6 +23,10 @@ class PdosFilter:
             self.pkeys=list(self.rawpdosdata.keys())
             self.xdata=self.rawpdosdata[self.pkeys[0]].index.to_list()
             self.sameorbital_pdos=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=self.afterpdosdata)
+
+      
+    def make_sameorbitaldata(self):
+            self.sameorbital_pdos=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=self.afterpdosdata)      
     
     def savepdos(self,orbital=list(range(1,6)),fig_name=str(),key='dos.isp1.site001.tmp'):
         plt.clf()
@@ -102,12 +106,14 @@ class PdosFilter:
                 c=[gausfunc(a,sigma) for a in np.arange(minx-maxx-dx,-minx+maxx+dx,dx)]
                 r=np.convolve(y,c,mode='valid')
                 for l,k in enumerate(x):
-                   self.afterpdosdata[key][j][k]=r[l]*dx
+                   self.afterpdosdata[key].loc[k,j] =r[l]*dx
 
+    
     def savepdos_sameorbital(self,specdata,orbital=list(range(1,6)),fig_name=str(),outputcsv=False):
         """sample specdata=[site number,[site element,(position)]]
         specdata=[['2', ['Cd', ('2.387228', '0.000000', '3.374500')]], ['4', ['S', ('2.387228', '0.000000', '5.972865')]]]
         """
+        self.make_sameorbitaldata()
         atomlist=[(str(i[1]),element_group[i[1][0]]) for i in specdata]
         atomlist.sort(key = lambda x: x[1])
         colordict={key:colordata[i] for i,(key,_) in enumerate(atomlist)}

@@ -1,13 +1,13 @@
 dir='/home/fujikazuki/gaustest'
 
 ciflist=[s.replace('\n','') for s in open(dir+'/cif_list.txt').readlines()]
-from readinfo import setcifdata
-td=setcifdata(ciflist[0])
-from pdosfilter import pdosfilter
+from xml.dom.expatbuilder import theDOMImplementation
+from pdosfilter import PdosFilter
 
-tpdos=pdosfilter(td.resultadress)
-import os
-os.chdir(dir)
+tpdos=PdosFilter(ciflist[0])
 
-tpdos.make_sameorbitaldata(td.specsite)
-tpdos.savepdos_sameorbital(td.specsite)
+print(tpdos.cifdata.cifnumber)
+print(tpdos.afterpdosdata['dos.isp1.site001.tmp'].columns.to_list)
+print(tpdos.afterpdosdata['dos.isp1.site001.tmp'])
+
+

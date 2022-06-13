@@ -103,7 +103,7 @@ def set_pdosdata(directory):
         realpdosdic={key:pd.DataFrame(columns=orbital,index=opdosdic[key].index*r).fillna(0) for key in files}
         for k,key in enumerate(opdosdic):
             opdosdic[key].index=opdosdic[key].index*r
-            for i,o in enumerate(orbital):
+            for i,o in enumerate(orbital,1):
                 anl=int(0.5*i*((i-1)*2+2))
                 anf=int(0.5*(i-1)*((i-2)*2+2)+1)
                 for j in range(anf,anl+1):
@@ -116,7 +116,7 @@ def set_sameorbital(specdata,pdosdata):
     """
     pkeys=list(pdosdata.keys())
     xdata=pdosdata[pkeys[0]].index.to_list()
-    ykeys=[str(s[1]) for i,s in enumerate(specdata)]
+    ykeys=[str(s[1]) for s in specdata]
     sameorbital_pdos=dict()
     for o in ORBITAL:
         empty_pdos=pd.DataFrame(index=xdata,columns=ykeys)

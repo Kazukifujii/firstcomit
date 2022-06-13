@@ -42,19 +42,27 @@ class ComparsionPdos():
         if len(self.pdos_data_1.cifdata.specsite)!=len(self.pdos_data_2.cifdata.specsite):
             print('not same number of specsite')
             return
-        
-        difdict=dict()
-        import matplotlib.pyplot as plt
+        self.pdos_data_1.make_sameorbitaldata()
+        self.pdos_data_2.make_sameorbitaldata()
+        self.difdict=dict()
         for orbital in ORBITAL:
             difdf=pd.DataFrame()
             for j in range(self.speclenge):
-                difdf[j]=self.pdos_data_1.sameorbital_pdos[orbital][self.atomlist1[j]]-self.pdos_data_2.sameorbital_pdos[orbital][self.atomlist2[j]]
-            self.ifdict[orbital]=difdf
+                difdf[j]=abs(self.pdos_data_1.sameorbital_pdos[orbital][self.atomlist1[j]]-self.pdos_data_2.sameorbital_pdos[orbital][self.atomlist2[j]])
+            self.difdict[orbital]=difdf
+    
+
 dir='/home/fujikazuki/gaustest'
 resultdir='/home/fujikazuki/gaustest/classtest'
 ciflist=[s.replace('\n','')  for s in open(dir+'/cif_list.txt')]
-tc=ComparsionPdos(cifadress_1=ciflist[0],cifadress_2=ciflist[1])
-print(tc.pdos_data_1.cifdata.cifnumber)
-print(tc.pdos_data_2.cifdata.cifnumber)
-#tc.gaussian(Sigma=0.5)
+tc=ComparsionPdos(cifadress_1=ciflist[10],cifadress_2=ciflist[2])
+print(tc.pdos_data_1.cifdata.specsite)
+print(tc.pdos_data_2.cifdata.specsite)
+tc.gaussian(Sigma=0.5)
 tc.difference()
+import matplotlib.pyplot as plt
+tc.difdict['p'].plot()
+plt.ylim([0,5])
+plt.xlim([-20,40])
+plt.grid()
+plt.show()
