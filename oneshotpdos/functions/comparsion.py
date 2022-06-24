@@ -50,7 +50,7 @@ class ComparsionPdos():
             for j in range(self.speclenge):
                 difdf[j]=abs(self.pdos_data_1.sameorbital_pdos[orbital][self.atomlist1[j]]-self.pdos_data_2.sameorbital_pdos[orbital][self.atomlist2[j]])
             self.difdict[orbital]=difdf
-    
+        
 
 dir='/home/fujikazuki/gaustest'
 resultdir='/home/fujikazuki/gaustest/classtest'

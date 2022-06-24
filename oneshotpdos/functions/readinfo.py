@@ -1,7 +1,14 @@
 #read and set cif's infomation from orignal cif file and SiteInfo.lmchk
 #set data teyp is dict. format is {cifnumber:[formula structural,{site number:[site atom,position]]}
-
+from scipy.signal import argrelmax,argrelmin
+from scipy import integrate
+import math
 import re,os
+import glob
+import pandas as pd
+from sympy import arg
+from constant import ORBITAL
+
 def siteinfo(file):
     linens=[re.sub(' {2,}','/',s.replace('\n','')).split('/') for s in open(file).readlines()]
     
@@ -84,9 +91,6 @@ class setcifdata():
             print('No such file is '+ciffile)
             self.formular=None
 
-import glob
-import pandas as pd
-from constant import ORBITAL
 def set_pdosdata(directory):
         '''sample
         dir='~/ciflist/result/1528444'
@@ -123,5 +127,24 @@ def set_sameorbital(specdata,pdosdata):
         for i,s in enumerate(ykeys):
             sitenumber=int(specdata[i][0])
             empty_pdos[s][:]=pdosdata['dos.isp1.site{0:03d}.tmp'.format(sitenumber)].loc[:,o]
-        sameorbital_pdos[str(o)]=empty_pdos
+        sameorbital_pdos[o]=empty_pdos
     return  sameorbital_pdos
+
+
+def peakrange(xdata,ydata):
+    argmax=argrelmax(ydata)
+    argmin=argrelmin(ydata)
+    integral_peak=list()
+    vii=0
+    for i,v in enumerate(argmin[0]):
+        integral_peak.append(integrate.simps(ydata[vii:v],xdata[vii:v]))
+        vii=v
+        if v==argmin[0][-1]:
+            integral_peak.append(integrate.simps(ydata[v:-1],xdata[v:-1]))
+    
+    resultlist=list()
+    sigmalist=[(math.pi*pow(ydata[argmax[0][i]]/v,2)) for i,v in enumerate(integral_peak)]
+    for i,v in enumerate(argmax[0]):
+        resultlist.append((xdata[v],ydata[v],sigmalist[i]))
+    return resultlist
+
