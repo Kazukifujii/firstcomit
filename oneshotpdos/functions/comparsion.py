@@ -1,10 +1,12 @@
-from importlib.util import spec_from_file_location
+from sympy import O, Or
+import readinfo as rf
 import pandas as pd
-from pdosfilter import PdosFilter
-from readinfo import setcifdata
+from pdosfilter import SameObitalPdosFilter as sop
 import re,os,itertools
 from constant import element_group,ORBITAL
 from makepdos import listup_cif
+import numpy as np
+
 
 def cif_conbination(cif_dir):
     cif_list_txt=cif_dir+'/cif_list.txt'
@@ -18,19 +20,19 @@ class ComparsionPdos():
     """
     """
     def __init__(self,cifadress_1,cifadress_2):
-        self.pdos_data_1=PdosFilter(cifadress_1)
-        self.pdos_data_2=PdosFilter(cifadress_2)
+        self.pdos_data_1=sop(cifadress_1)
+        self.pdos_data_2=sop(cifadress_2)
         if len(self.pdos_data_1.cifdata.specsite)!=len(self.pdos_data_2.cifdata.specsite):
             print('not same number of specsite')
             return
         self.weight=dict()
-        self.speclenge=len(self.pdos_data_1.cifdata.specsite)
+        self.specrange=len(self.pdos_data_1.cifdata.specsite)
         atomlist1=[(str(i[1]),element_group[i[1][0]]) for i in self.pdos_data_1.cifdata.specsite]
         atomlist2=[(str(i[1]),element_group[i[1][0]]) for i in self.pdos_data_2.cifdata.specsite]
         atomlist1.sort(key = lambda x: x[1])
         atomlist2.sort(key = lambda x: x[1])
-        self.atomlist1=[s for s,_ in atomlist1]
-        self.atomlist2=[s for s,_ in atomlist2]
+        self.atomlist_1=[s for s,_ in atomlist1]
+        self.atomlist_2=[s for s,_ in atomlist2]
     
     def gaussian(self,Sigma):
         self.pdos_data_1.gaussianfilter(sigma=Sigma)
@@ -42,27 +44,48 @@ class ComparsionPdos():
         if len(self.pdos_data_1.cifdata.specsite)!=len(self.pdos_data_2.cifdata.specsite):
             print('not same number of specsite')
             return
-        self.pdos_data_1.make_sameorbitaldata()
-        self.pdos_data_2.make_sameorbitaldata()
         self.difdict=dict()
         for orbital in ORBITAL:
             difdf=pd.DataFrame()
-            for j in range(self.speclenge):
-                difdf[j]=abs(self.pdos_data_1.sameorbital_pdos[orbital][self.atomlist1[j]]-self.pdos_data_2.sameorbital_pdos[orbital][self.atomlist2[j]])
+            for j,_ in enumerate(self.specrange):
+                difdf[j]=abs(self.pdos_data_1.afterdata[orbital][self.atomlist_1[j]]-self.pdos_data_2.afterdata[orbital][self.atomlist_2[j]])
             self.difdict[orbital]=difdf
-        
+    
+    def peak_range(self):
+        self.peakdata_1=dict()
+        idx=pd.MultiIndex.from_arrays([[self.atomlist_1[int(ss/3)] for ss in range((3*len(self.atomlist_1)))],['arg_x','arg_y','peak_range']*len(self.atomlist_1)])
+        peakdf=pd.DataFrame(columns=idx)
+        for orbital in ORBITAL:
+            for ss in self.atomlist_1:
+                peakdf[ss]=pd.DataFrame(rf.peakrange(np.array(self.pdos_data_1.xdata),self.pdos_data_1.afterdata[orbital][ss].to_numpy()),columns=['arg_x','arg_y','peak_range'])
+            self.peakdata_1[orbital]=peakdf
 
 dir='/home/fujikazuki/gaustest'
 resultdir='/home/fujikazuki/gaustest/classtest'
 ciflist=[s.replace('\n','')  for s in open(dir+'/cif_list.txt')]
-tc=ComparsionPdos(cifadress_1=ciflist[10],cifadress_2=ciflist[2])
-print(tc.pdos_data_1.cifdata.specsite)
-print(tc.pdos_data_2.cifdata.specsite)
+tc=ComparsionPdos(cifadress_1=ciflist[11],cifadress_2=ciflist[2])
 tc.gaussian(Sigma=0.5)
-tc.difference()
+tc.peak_range()
+o='p'
+s=0
+
 import matplotlib.pyplot as plt
-tc.difdict['p'].plot()
-plt.ylim([0,5])
-plt.xlim([-20,40])
-plt.grid()
+fig=plt.figure()
+ax1=fig.add_subplot(1, 1, 1)
+xdata=tc.pdos_data_1.xdata
+ydata=tc.pdos_data_1.afterdata[o][tc.atomlist_1[0]].to_list()
+xmax=tc.peakdata_1[o][tc.atomlist_1[s]]['arg_x'].to_list()
+ymax=tc.peakdata_1[o][tc.atomlist_1[s]]['arg_y'].to_list()
+integral_peak=tc.peakdata_1[o][tc.atomlist_1[s]]['peak_range'].to_list()
+ax1.plot(xdata,ydata)
+ax1.plot(xmax,ymax,'ro')
+for i in range(len(xmax)):
+    if i%2==0:
+        ax1.plot([xmax[i]-integral_peak[i],xmax[i]+integral_peak[i]],[2,2],'mo')
+    else:
+        ax1.plot([xmax[i]-integral_peak[i],xmax[i]+integral_peak[i]],[3,3],'mo')
+
+ax1.set_ylim([0,5])
+ax1.set_xlim([-20,40])
+ax1.grid()
 plt.show()
