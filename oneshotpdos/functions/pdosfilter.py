@@ -205,3 +205,4 @@ class SameObitalPdosFilter:
                 r=np.convolve(y,c,mode='valid')*dx
                 for l,k in enumerate(self.xdata):
                    self.afterdata[o].loc[k,str(j[1])]=r[l]
+    

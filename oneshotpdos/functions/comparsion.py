@@ -53,13 +53,13 @@ class ComparsionPdos():
     
     def peak_range(self):
         self.peakdata_1=dict()
-        idx=pd.MultiIndex.from_arrays([[self.atomlist_1[int(ss/3)] for ss in range((3*len(self.atomlist_1)))],['arg_x','arg_y','peak_range']*len(self.atomlist_1)])
-        peakdf=pd.DataFrame(columns=idx)
         for orbital in ORBITAL:
-            for ss in self.atomlist_1:
-                peakdf[ss]=pd.DataFrame(rf.peakrange(np.array(self.pdos_data_1.xdata),self.pdos_data_1.afterdata[orbital][ss].to_numpy()),columns=['arg_x','arg_y','peak_range'])
-            self.peakdata_1[orbital]=peakdf
-
+            peakd=dict()
+            for i,ss in enumerate(self.atomlist_1):
+                peakd[ss]=pd.DataFrame(rf.peakrange(np.array(self.pdos_data_1.xdata),self.pdos_data_1.afterdata[orbital][ss].to_numpy()),columns=['arg_x','arg_y','peak_range'])
+            self.peakdata_1[orbital]=pd.concat(peakd,axis=1)
+        self.peakdata_1=pd.concat(self.peakdata_1)
+        
 dir='/home/fujikazuki/gaustest'
 resultdir='/home/fujikazuki/gaustest/classtest'
 ciflist=[s.replace('\n','')  for s in open(dir+'/cif_list.txt')]
@@ -67,16 +67,18 @@ tc=ComparsionPdos(cifadress_1=ciflist[11],cifadress_2=ciflist[2])
 tc.gaussian(Sigma=0.5)
 tc.peak_range()
 o='p'
-s=0
-
+s=1
+print(tc.peakdata_1)
 import matplotlib.pyplot as plt
 fig=plt.figure()
 ax1=fig.add_subplot(1, 1, 1)
+idx=pd.IndexSlice[o,:]
+col=pd.IndexSlice
 xdata=tc.pdos_data_1.xdata
-ydata=tc.pdos_data_1.afterdata[o][tc.atomlist_1[0]].to_list()
-xmax=tc.peakdata_1[o][tc.atomlist_1[s]]['arg_x'].to_list()
-ymax=tc.peakdata_1[o][tc.atomlist_1[s]]['arg_y'].to_list()
-integral_peak=tc.peakdata_1[o][tc.atomlist_1[s]]['peak_range'].to_list()
+ydata=tc.pdos_data_1.afterdata[o][tc.atomlist_1[s]].to_list()
+xmax=tc.peakdata_1.loc[idx,col[tc.atomlist_1[1],'arg_x']].to_list()
+ymax=tc.peakdata_1.loc[idx,col[tc.atomlist_1[1],'arg_y']].to_list()
+integral_peak=tc.peakdata_1.loc[idx,col[tc.atomlist_1[1],'peak_range']].to_numpy()/2
 ax1.plot(xdata,ydata)
 ax1.plot(xmax,ymax,'ro')
 for i in range(len(xmax)):
