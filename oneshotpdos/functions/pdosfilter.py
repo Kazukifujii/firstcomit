@@ -1,10 +1,10 @@
-from readinfo import set_pdosdata
+from readinfo import SetMpData, set_pdosdata
 import matplotlib.pyplot as plt
 import math
 import pandas as pd
 import numpy as np
 from constant import ORBITAL, element_group,colordata
-from readinfo import set_sameorbital,setcifdata
+from readinfo import set_sameorbital,setcifdata,peakrange
 
 def gausfunc(x,sigma):
         return pow(2*math.pi*sigma**2,-0.5)*math.exp(-(x**2)/(2*sigma**2))
@@ -205,4 +205,50 @@ class SameObitalPdosFilter:
                 r=np.convolve(y,c,mode='valid')*dx
                 for l,k in enumerate(self.xdata):
                    self.afterdata[o].loc[k,str(j[1])]=r[l]
+    
+    def peakdata(self):
+        all_peakd=dict()
+        satomlist=[str(i[1]) for i in self.cifdata.specsite]
+        for orbital in ORBITAL:
+            o_peakd=dict()
+            for i,sa in enumerate(satomlist):
+                X=np.array(self.xdata)
+                Y=self.afterdata[orbital].loc[:,sa].to_numpy()
+                o_peakd[sa]=pd.DataFrame(peakrange(X,Y),columns=['arg_x','arg_y','peak_range'])
+            all_peakd[orbital]=pd.concat(o_peakd,axis=1)
+        self.peaks=pd.concat(all_peakd)
+
+from readinfo import SetMpData as smd
+
+class MpPosdata:
+    def __init__(self,mpadress):
+        self.mpdata=smd(mpadress)
+        if  self.mpdata.allsite!=None:
+            self.rowdata=set_sameorbital(specdata=self.mpdata.specsite,pdosdata=set_pdosdata(self.mpdata.resultadress))
+            self.afterdata=set_sameorbital(specdata=self.mpdata.specsite,pdosdata=set_pdosdata(self.mpdata.resultadress))
+            self.xdata=self.rowdata[ORBITAL[0]].index.to_list()
+    
+    def gaussianfilter(self,sigma):
+        for o in ORBITAL:
+            for j in self.mpdata.specsite:
+                y=self.afterdata[o][str(j[1])][:]
+                dx=self.xdata[1]-self.xdata[0]
+                minx=self.xdata[0]
+                maxx=self.xdata[-1]
+                c=[gausfunc(a,sigma) for a in np.arange(minx-maxx-dx,-minx+maxx+dx,dx)]
+                r=np.convolve(y,c,mode='valid')*dx
+                for l,k in enumerate(self.xdata):
+                   self.afterdata[o].loc[k,str(j[1])]=r[l]
+    
+    def peakdata(self):
+        all_peakd=dict()
+        satomlist=[str(i[1]) for i in self.mpdata.specsite]
+        for orbital in ORBITAL:
+            o_peakd=dict()
+            for i,sa in enumerate(satomlist):
+                X=np.array(self.xdata)
+                Y=self.afterdata[orbital].loc[:,sa].to_numpy()
+                o_peakd[sa]=pd.DataFrame(peakrange(X,Y),columns=['arg_x','arg_y','peak_range'])
+            all_peakd[orbital]=pd.concat(o_peakd,axis=1)
+        self.peaks=pd.concat(all_peakd)
     

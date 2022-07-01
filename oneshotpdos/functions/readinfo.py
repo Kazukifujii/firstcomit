@@ -91,6 +91,19 @@ class setcifdata():
             print('No such file is '+ciffile)
             self.formular=None
 
+
+class SetMpData:
+    def __init__(self,mpdir):
+        self.resultadress=mpdir
+        atomsitefile=self.resultadress+'/SiteInfo.lmchk'
+        if os.path.isfile(atomsitefile):
+            self.allsite=siteinfo(atomsitefile)
+            self.specsite=specinfo(atomsitefile)
+        else:
+            print('No such file is'+atomsitefile)
+            self.allsite=None
+
+
 def set_pdosdata(directory):
         '''sample
         dir='~/ciflist/result/1528444'

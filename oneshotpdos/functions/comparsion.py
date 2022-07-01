@@ -69,6 +69,7 @@ tc.peak_range()
 o='p'
 s=1
 print(tc.peakdata_1)
+"""
 import matplotlib.pyplot as plt
 fig=plt.figure()
 ax1=fig.add_subplot(1, 1, 1)
@@ -91,3 +92,4 @@ ax1.set_ylim([0,5])
 ax1.set_xlim([-20,40])
 ax1.grid()
 plt.show()
+"""
