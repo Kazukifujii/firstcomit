@@ -141,7 +141,10 @@ class SameObitalPdosFilter:
             self.rowdata=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=set_pdosdata(self.cifdata.resultadress))
             self.afterdata=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=set_pdosdata(self.cifdata.resultadress))
             self.xdata=self.rowdata[ORBITAL[0]].index.to_list()
-    
+            atomlist=[(str(i[1]),element_group[i[1][0]]) for i in self.cifdata.specsite]
+            atomlist.sort(key = lambda x: x[1])
+            self.atomlist=[i for i,_ in atomlist]
+
     def gaussianfilter(self,sigma):
         """
         import pdosfilter as pf

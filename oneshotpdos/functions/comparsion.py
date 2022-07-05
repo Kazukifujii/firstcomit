@@ -6,6 +6,7 @@ import re,os,itertools
 from constant import element_group,ORBITAL
 from makepdos import listup_cif
 import numpy as np
+import math
 
 
 def cif_conbination(cif_dir):
@@ -18,6 +19,14 @@ def cif_conbination(cif_dir):
 
 class ComparsionPdos():
     """
+    dir='/home/fujikazuki/gaustest'
+    resultdir='/home/fujikazuki/gaustest/classtest'
+    ciflist=[s.replace('\n','')  for s in open(dir+'/cif_list.txt')]
+    tc=ComparsionPdos(cifadress_1=ciflist[11],cifadress_2=ciflist[2])
+    tc.gaussian(Sigma=0.5)
+    tc.peak_range()
+    tc.make_L()
+    print(tc.L_df)
     """
     def __init__(self,cifadress_1,cifadress_2):
         self.pdos_data_1=sop(cifadress_1)
@@ -52,44 +61,24 @@ class ComparsionPdos():
             self.difdict[orbital]=difdf
     
     def peak_range(self):
-        self.peakdata_1=dict()
-        for orbital in ORBITAL:
-            peakd=dict()
-            for i,ss in enumerate(self.atomlist_1):
-                peakd[ss]=pd.DataFrame(rf.peakrange(np.array(self.pdos_data_1.xdata),self.pdos_data_1.afterdata[orbital][ss].to_numpy()),columns=['arg_x','arg_y','peak_range'])
-            self.peakdata_1[orbital]=pd.concat(peakd,axis=1)
-        self.peakdata_1=pd.concat(self.peakdata_1)
+        self.pdos_data_1.peakdata()
+        self.pdos_data_2.peakdata()
+    
+    def make_L(self):
+        siten_dic=dict()
+        for siten in [0,1]:
+            col_d1=pd.IndexSlice[self.pdos_data_1.atomlist[siten],:]
+            col_d2=pd.IndexSlice[self.pdos_data_2.atomlist[siten],:]
+            orbital_dic=dict()
+            for o in ORBITAL:
+                idx=pd.IndexSlice[o,:]
+                orbital_df=pd.DataFrame()
+                for I,i in self.pdos_data_1.peaks.loc[idx,col_d1].iterrows():
+                    for J,j in self.pdos_data_2.peaks.loc[idx,col_d2].iterrows():
+                        l=abs(i.droplevel(level=0)-j.droplevel(level=0))
+                        L=l['arg_y']*math.sqrt(l['arg_x']*2+l['peak_range']*2)
+                        orbital_df.loc[I[1],J[1]]=L
+                orbital_dic[o]=orbital_df
+            siten_dic['site_%i'%siten]=pd.concat(orbital_dic)
+        self.L_df=pd.concat(siten_dic,axis=1)
         
-dir='/home/fujikazuki/gaustest'
-resultdir='/home/fujikazuki/gaustest/classtest'
-ciflist=[s.replace('\n','')  for s in open(dir+'/cif_list.txt')]
-tc=ComparsionPdos(cifadress_1=ciflist[11],cifadress_2=ciflist[2])
-tc.gaussian(Sigma=0.5)
-tc.peak_range()
-o='p'
-s=1
-print(tc.peakdata_1)
-"""
-import matplotlib.pyplot as plt
-fig=plt.figure()
-ax1=fig.add_subplot(1, 1, 1)
-idx=pd.IndexSlice[o,:]
-col=pd.IndexSlice
-xdata=tc.pdos_data_1.xdata
-ydata=tc.pdos_data_1.afterdata[o][tc.atomlist_1[s]].to_list()
-xmax=tc.peakdata_1.loc[idx,col[tc.atomlist_1[1],'arg_x']].to_list()
-ymax=tc.peakdata_1.loc[idx,col[tc.atomlist_1[1],'arg_y']].to_list()
-integral_peak=tc.peakdata_1.loc[idx,col[tc.atomlist_1[1],'peak_range']].to_numpy()/2
-ax1.plot(xdata,ydata)
-ax1.plot(xmax,ymax,'ro')
-for i in range(len(xmax)):
-    if i%2==0:
-        ax1.plot([xmax[i]-integral_peak[i],xmax[i]+integral_peak[i]],[2,2],'mo')
-    else:
-        ax1.plot([xmax[i]-integral_peak[i],xmax[i]+integral_peak[i]],[3,3],'mo')
-
-ax1.set_ylim([0,5])
-ax1.set_xlim([-20,40])
-ax1.grid()
-plt.show()
-"""
