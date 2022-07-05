@@ -6,7 +6,6 @@ import math
 import re,os
 import glob
 import pandas as pd
-from sympy import arg
 from constant import ORBITAL
 
 def siteinfo(file):

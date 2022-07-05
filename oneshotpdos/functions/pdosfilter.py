@@ -220,13 +220,16 @@ class SameObitalPdosFilter:
 
 from readinfo import SetMpData as smd
 
-class MpPosdata:
+class MpPosdata():
     def __init__(self,mpadress):
         self.mpdata=smd(mpadress)
         if  self.mpdata.allsite!=None:
             self.rowdata=set_sameorbital(specdata=self.mpdata.specsite,pdosdata=set_pdosdata(self.mpdata.resultadress))
             self.afterdata=set_sameorbital(specdata=self.mpdata.specsite,pdosdata=set_pdosdata(self.mpdata.resultadress))
             self.xdata=self.rowdata[ORBITAL[0]].index.to_list()
+            atomlist=[(str(i[1]),element_group[i[1][0]]) for i in self.mpdata.specsite]
+            atomlist.sort(key = lambda x: x[1])
+            self.atomlist=[i for i,_ in atomlist]
     
     def gaussianfilter(self,sigma):
         for o in ORBITAL:
@@ -245,7 +248,7 @@ class MpPosdata:
         satomlist=[str(i[1]) for i in self.mpdata.specsite]
         for orbital in ORBITAL:
             o_peakd=dict()
-            for i,sa in enumerate(satomlist):
+            for i,sa in enumerate(self.atomlist):
                 X=np.array(self.xdata)
                 Y=self.afterdata[orbital].loc[:,sa].to_numpy()
                 o_peakd[sa]=pd.DataFrame(peakrange(X,Y),columns=['arg_x','arg_y','peak_range'])
