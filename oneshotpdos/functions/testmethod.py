@@ -1,3 +1,4 @@
+
 from readinfo import *
 
 def tset_pdosdata(directory):
@@ -24,7 +25,7 @@ def tset_pdosdata(directory):
         return pd.concat(realpdosdic,axis=0)
 
 def tset_sameorbital(specdata,pdosdata):
-    level_1_keys=np.unique(d1.index.get_level_values(0).to_numpy())
+    level_1_keys=np.unique(pdosdata.index.get_level_values(0).to_numpy())
     idx=pd.IndexSlice[level_1_keys,:]
     xdata=pdosdata.xs(level_1_keys[0],level=0).index
     ykeys=[str(s[1]) for s in specdata]
@@ -48,4 +49,4 @@ d1=tset_pdosdata(cifdata.resultadress)
 import numpy as np
 sd1=tset_sameorbital(cifdata.specsite,pdosdata=d1)
 idx=pd.IndexSlice['s',:]
-print(sd1.loc[:,idx])
+print(sd1)

@@ -1,12 +1,15 @@
-from pdosfilter import MpPosdata as sob
+from pdosfilter import MpPosdata as mpd
+resultdir='/home/fujikazuki/Documents/mp2534'
+
+t=mpd(mpadress=resultdir)
+t.gaussianfilter(sigma=0.5)
 
 
-dir='/home/fujikazuki/Documents/ecalj関係/mp1000'
-dir2='/home/fujikazuki/Documents/ecalj関係/mp1885'
+import matplotlib.pyplot as plt
 
-d1=sob(dir)
-d1.gaussianfilter(0.5)
-d1.peakdata()
-d2=sob(dir2)
-d2.gaussianfilter(0.5)
-d2.peakdata()
+import pandas as pd
+idx=pd.IndexSlice['s',:]
+col=pd.IndexSlice[t.atomlist[0]]
+
+t.afterdata.plot()
+plt.show()
