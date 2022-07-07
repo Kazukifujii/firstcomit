@@ -1,11 +1,8 @@
-from sympy import O, Or
-import readinfo as rf
 import pandas as pd
 from pdosfilter import SameObitalPdosFilter as sop
 import re,os,itertools
-from constant import element_group,ORBITAL
+from constant import ORBITAL
 from makepdos import listup_cif
-import numpy as np
 import math
 
 

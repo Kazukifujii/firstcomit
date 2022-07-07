@@ -131,7 +131,7 @@ class AllsitePdosFilter:
                 self.sameorbital_pdos[str(val)].to_csv(titile+'.csv')
         return
 
-class MpPosdata(smd):
+class MpPdosdata(smd):
     def __init__(self,diradress):
         super().__init__(diradress)
         if  self.allsite!=None:
@@ -182,7 +182,7 @@ class MpPosdata(smd):
         else:
             print('not difinde ptype=%d'%ftype)
 
-class SameObitalPdosFilter(setcifdata):
+class SameobitalPdosdata(setcifdata):
     def __init__(self,diradress):
         super().__init__(diradress)
         if  self.allsite!=None:
