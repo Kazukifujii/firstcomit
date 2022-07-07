@@ -185,14 +185,38 @@ def peakrange(xdata,ydata):
     for i,v in enumerate(argmin):
         if xdata[vii]<=xdata[argmax[maxi]] and xdata[v]>=xdata[argmax[maxi]]:
             I=integrate.simps(ydata[vii:v],xdata[vii:v])
-            sigma=math.pi*pow(ydata[argmax[maxi]]/I,2)
+            #sigma=math.pi*pow(ydata[argmax[maxi]]/I,2)
+            sigma=pow(2*math.pi,-0.5)*I/ydata[argmax[maxi]]
             resultlist.append((xdata[maxi],ydata[maxi],sigma*2))
             vii=v
             maxi+=1
         if v==argmin[-1]:
             if xdata[v]<=xdata[argmax[maxi]] and xdata[-1]>=xdata[argmax[maxi]]:
                 I=integrate.simps(ydata[v:-1],xdata[v:-1])
-                sigma=math.pi*pow(ydata[argmax[maxi]]/I,2)
+                #sigma=math.pi*pow(ydata[argmax[maxi]]/I,2)
+                sigma=pow(2*math.pi,-0.5)*I/ydata[argmax[maxi]]
                 resultlist.append((xdata[maxi],ydata[maxi],sigma*2))
     return resultlist
 
+
+def peakrange_histogram(xdata,ydata):
+    argmax=argrelmax(ydata)[0]
+    argmin=argrelmin(ydata)[0]
+    for i in range(len(argmax)-len(argmin)+1):
+        argmax=np.append(argmax,0)
+    vii=0
+    maxi=0
+    resultlist=list()
+    for i,v in enumerate(argmin):
+        if xdata[vii]<=xdata[argmax[maxi]] and xdata[v]>=xdata[argmax[maxi]]:
+            I=integrate.simps(ydata[vii:v],xdata[vii:v])
+            prange=I/ydata[argmax[maxi]]
+            resultlist.append((xdata[maxi],ydata[maxi],prange))
+            vii=v
+            maxi+=1
+        if v==argmin[-1]:
+            if xdata[v]<=xdata[argmax[maxi]] and xdata[-1]>=xdata[argmax[maxi]]:
+                I=integrate.simps(ydata[v:-1],xdata[v:-1])
+                prange=I/ydata[argmax[maxi]]
+                resultlist.append((xdata[maxi],ydata[maxi],prange))
+    return resultlist

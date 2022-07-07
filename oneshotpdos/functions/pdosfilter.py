@@ -1,10 +1,11 @@
-from readinfo import SetMpData, set_pdosdata
+from readinfo import SetMpData, peakrange_histogram, set_pdosdata
 import matplotlib.pyplot as plt
 import math
 import pandas as pd
 import numpy as np
 from constant import ORBITAL, element_group,colordata
 from readinfo import set_sameorbital,setcifdata,peakrange
+from readinfo import SetMpData as smd
 
 def gausfunc(x,sigma):
         return pow(2*math.pi*sigma**2,-0.5)*math.exp(-(x**2)/(2*sigma**2))
@@ -15,8 +16,8 @@ class PdosFilter:
     ciffile='~/ciflist/9008862.cif
     cpdos=PdosFilter(ciffile)
     """
-    def __init__(self,cifadress):
-        self.cifdata=setcifdata(cifadress)
+    def __init__(self,diradress):
+        self.cifdata=setcifdata(diradress)
         if  self.cifdata.allsite!=None:
             self.rawpdosdata=set_pdosdata(self.cifdata.resultadress)
             self.afterpdosdata=set_pdosdata(self.cifdata.resultadress)
@@ -135,11 +136,11 @@ class SameObitalPdosFilter:
     ciffile='~/ciflist/9008862.cif
     cpdos=PdosFilter(ciffile)
     """
-    def __init__(self,cifadress):
-        self.cifdata=setcifdata(cifadress)
-        if  self.cifdata.allsite!=None:
-            self.rowdata=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=set_pdosdata(self.cifdata.resultadress))
-            self.afterdata=set_sameorbital(specdata=self.cifdata.specsite,pdosdata=set_pdosdata(self.cifdata.resultadress))
+    def __init__(self,diradress):
+        self.adressdata=setcifdata(diradress)
+        if  self.adressdata.allsite!=None:
+            self.rowdata=set_sameorbital(specdata=self.adressdata.specsite,pdosdata=set_pdosdata(self.adressdata.resultadress))
+            self.afterdata=set_sameorbital(specdata=self.adressdata.specsite,pdosdata=set_pdosdata(self.adressdata.resultadress))
             self.xdata=self.rowdata.loc[pd.IndexSlice[ORBITAL[0],:],:].index.get_level_values(level=1).to_list()
             atomlist=[(str(i[1]),element_group[i[1][0]]) for i in self.cifdata.specsite]
             atomlist.sort(key = lambda x: x[1])
@@ -222,19 +223,17 @@ class SameObitalPdosFilter:
                 o_peakd[sa]=pd.DataFrame(peakrange(X,Y),columns=['arg_x','arg_y','peak_range'])
             all_peakd[orbital]=pd.concat(o_peakd,axis=1)
         self.peaks=pd.concat(all_peakd)
-        
-    
 
-from readinfo import SetMpData as smd
+
 
 class MpPosdata():
-    def __init__(self,mpadress):
-        self.mpdata=smd(mpadress)
-        if  self.mpdata.allsite!=None:
-            self.rowdata=set_sameorbital(specdata=self.mpdata.specsite,pdosdata=set_pdosdata(self.mpdata.resultadress))
-            self.afterdata=set_sameorbital(specdata=self.mpdata.specsite,pdosdata=set_pdosdata(self.mpdata.resultadress))
+    def __init__(self,diradress):
+        self.adressdata=smd(diradress)
+        if  self.adressdata.allsite!=None:
+            self.rowdata=set_sameorbital(specdata=self.adressdata.specsite,pdosdata=set_pdosdata(self.adressdata.resultadress))
+            self.afterdata=set_sameorbital(specdata=self.adressdata.specsite,pdosdata=set_pdosdata(self.adressdata.resultadress))
             self.xdata=self.rowdata.loc[pd.IndexSlice[ORBITAL[0],:],:].index.get_level_values(level=1).to_list()
-            atomlist=[(str(i[1]),element_group[i[1][0]]) for i in self.mpdata.specsite]
+            atomlist=[(str(i[1]),element_group[i[1][0]]) for i in self.adressdata.specsite]
             atomlist.sort(key = lambda x: x[1])
             self.atomlist=[i for i,_ in atomlist]
     
@@ -264,3 +263,14 @@ class MpPosdata():
             all_peakd[orbital]=pd.concat(o_peakd,axis=1)
         self.peaks=pd.concat(all_peakd)
     
+    def peakdata_histogram(self):
+        all_peakd=dict()
+        for orbital in ORBITAL:
+            o_peakd=dict()
+            for i,sa in enumerate(self.atomlist):
+                X=np.array(self.xdata)
+                idx=pd.IndexSlice[orbital,:]
+                Y=self.afterdata.loc[idx,sa].to_numpy()
+                o_peakd[sa]=pd.DataFrame(peakrange_histogram(X,Y),columns=['arg_x','arg_y','peak_range'])
+            all_peakd[orbital]=pd.concat(o_peakd,axis=1)
+        self.peaks_h=pd.concat(all_peakd)

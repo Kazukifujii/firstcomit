@@ -1,15 +1,7 @@
 from pdosfilter import MpPosdata as mpd
-resultdir='/home/fujikazuki/Documents/mp2534'
+dir='/home/fujikazuki/Documents/mp2534'
 
-t=mpd(mpadress=resultdir)
+t=mpd(dir)
 t.gaussianfilter(sigma=0.5)
-
-
-import matplotlib.pyplot as plt
-
-import pandas as pd
-idx=pd.IndexSlice['s',:]
-col=pd.IndexSlice[t.atomlist[0]]
-
-t.afterdata.plot()
-plt.show()
+t.peakdata_histogram()
+t.peaks_h
