@@ -1,5 +1,5 @@
 import pandas as pd
-from pdosfilter import SameObitalPdosFilter as sop
+from pdosfilter import SameobitalPdosdata as sop
 import re,os,itertools
 from constant import ORBITAL
 from makepdos import listup_cif

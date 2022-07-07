@@ -181,6 +181,24 @@ class MpPdosdata(smd):
             self.peaks=pd.concat(all_peakd)
         else:
             print('not difinde ptype=%d'%ftype)
+    def make_histogram(self,d=400):
+        all_peakd=dict()
+        for orbital in ORBITAL:
+            o_peakd=dict()
+            for i,sa in enumerate(self.atomlist):
+                X=np.array(self.xdata)
+                idx=pd.IndexSlice[orbital,:]
+                Y=self.afterdata.loc[idx,sa].to_numpy()
+                h_list=list()
+                dx=np.array_split(X,d)
+                dy=np.array_split(Y,d)
+                for j,_ in enumerate(dx):
+                    h_list.append((np.median(dx[j]),np.median(dy[j]),abs(dx[j][0]-dx[j][-1])))
+                o_peakd[sa]=pd.DataFrame(h_list,columns=['arg_x','arg_y','peak_range'])
+            all_peakd[orbital]=pd.concat(o_peakd,axis=1)
+        self.histogram=pd.concat(all_peakd)
+
+
 
 class SameobitalPdosdata(setcifdata):
     def __init__(self,diradress):
@@ -232,3 +250,20 @@ class SameobitalPdosdata(setcifdata):
             self.peaks=pd.concat(all_peakd)
         else:
             print('not difinde ptype=%d'%ftype)
+    
+    def make_histogram(self,d=400):
+        all_peakd=dict()
+        for orbital in ORBITAL:
+            o_peakd=dict()
+            for i,sa in enumerate(self.atomlist):
+                X=np.array(self.xdata)
+                idx=pd.IndexSlice[orbital,:]
+                Y=self.afterdata.loc[idx,sa].to_numpy()
+                h_list=list()
+                dx=np.array_split(X,d)
+                dy=np.array_split(Y,d)
+                for j,_ in enumerate(dx):
+                    h_list.append((np.median(dx[j]),np.median(dy[j]),abs(dx[j][0]-dx[j][-1])))
+                o_peakd[sa]=pd.DataFrame(h_list,columns=['arg_x','arg_y','peak_range'])
+            all_peakd[orbital]=pd.concat(o_peakd,axis=1)
+        self.histogram=pd.concat(all_peakd)
