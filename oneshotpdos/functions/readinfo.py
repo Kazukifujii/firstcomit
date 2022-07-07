@@ -6,8 +6,8 @@ import math
 import re,os
 import glob
 import pandas as pd
-from sympy import arg
 from constant import ORBITAL
+import numpy as np
 
 def siteinfo(file):
     linens=[re.sub(' {2,}','/',s.replace('\n','')).split('/') for s in open(file).readlines()]
@@ -109,23 +109,6 @@ def set_pdosdata(directory):
         dir='~/ciflist/result/1528444'
         dict_df=set_pdosdata(dir)
         '''
-        """if not os.path.isdir(directory):
-            print(directory+" dose no exist")
-            return
-        files=glob.glob(directory+'/dos.isp1.site*')
-        files=[re.search(r"([^/]*?)$",s).group() for s in files]
-        opdosdic={key:pd.read_csv(directory+'/'+key,header=None,index_col=0,comment='#',delim_whitespace=True) for key in files}
-        r=13.605
-        orbital=ORBITAL
-        realpdosdic={key:pd.DataFrame(columns=orbital,index=opdosdic[key].index*r).fillna(0) for key in files}
-        for k,key in enumerate(opdosdic):
-            opdosdic[key].index=opdosdic[key].index*r
-            for i,o in enumerate(orbital,1):
-                anl=int(0.5*i*((i-1)*2+2))
-                anf=int(0.5*(i-1)*((i-2)*2+2)+1)
-                for j in range(anf,anl+1):
-                    realpdosdic[key][o]+=opdosdic[key][j]/r
-        return realpdosdic"""
         if not os.path.isdir(directory):
             print(directory+" dose no exist")
             return
@@ -148,17 +131,6 @@ def set_sameorbital(specdata,pdosdata):
     """sample specdata=[site number,[site element,(position)]]
     specdata=[['2', ['Cd', ('2.387228', '0.000000', '3.374500')]], ['4', ['S', ('2.387228', '0.000000', '5.972865')]]]
     """
-    """pkeys=list(pdosdata.keys())
-    xdata=pdosdata[pkeys[0]].index.to_list()
-    ykeys=[str(s[1]) for s in specdata]
-    sameorbital_pdos=dict()
-    for o in ORBITAL:
-        empty_pdos=pd.DataFrame(index=xdata,columns=ykeys)
-        for i,s in enumerate(ykeys):
-            sitenumber=int(specdata[i][0])
-            empty_pdos[s][:]=pdosdata['dos.isp1.site{0:03d}.tmp'.format(sitenumber)].loc[:,o]
-        sameorbital_pdos[o]=empty_pdos
-    return  sameorbital_pdos"""
     level_1_keys=np.unique(pdosdata.index.get_level_values(0).to_numpy())
     idx=pd.IndexSlice[level_1_keys,:]
     xdata=pdosdata.xs(level_1_keys[0],level=0).index
@@ -173,7 +145,7 @@ def set_sameorbital(specdata,pdosdata):
         sameorbital_pdos[o]=empty_pdos
     return  pd.concat(sameorbital_pdos)
 
-import numpy as np
+
 def peakrange(xdata,ydata):
     argmax=argrelmax(ydata)[0]
     argmin=argrelmin(ydata)[0]

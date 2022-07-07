@@ -31,38 +31,19 @@ class ComparsionPdos():
     def __init__(self,cifadress_1,cifadress_2):
         self.pdos_data_1=sop(cifadress_1)
         self.pdos_data_2=sop(cifadress_2)
-        if len(self.pdos_data_1.cifdata.specsite)!=len(self.pdos_data_2.cifdata.specsite):
+        if len(self.pdos_data_1.specsite)!=len(self.pdos_data_2.specsite):
             print('not same number of specsite')
             return
         self.weight=dict()
-        self.specrange=len(self.pdos_data_1.cifdata.specsite)
-        atomlist1=[(str(i[1]),element_group[i[1][0]]) for i in self.pdos_data_1.cifdata.specsite]
-        atomlist2=[(str(i[1]),element_group[i[1][0]]) for i in self.pdos_data_2.cifdata.specsite]
-        atomlist1.sort(key = lambda x: x[1])
-        atomlist2.sort(key = lambda x: x[1])
-        self.atomlist_1=[s for s,_ in atomlist1]
-        self.atomlist_2=[s for s,_ in atomlist2]
+        self.specrange=len(self.pdos_data_1.specsite)
     
     def gaussian(self,Sigma):
         self.pdos_data_1.gaussianfilter(sigma=Sigma)
         self.pdos_data_2.gaussianfilter(sigma=Sigma)
-        
     
-    def difference(self):
-        #sort by element group number
-        if len(self.pdos_data_1.cifdata.specsite)!=len(self.pdos_data_2.cifdata.specsite):
-            print('not same number of specsite')
-            return
-        self.difdict=dict()
-        for orbital in ORBITAL:
-            difdf=pd.DataFrame()
-            for j,_ in enumerate(self.specrange):
-                difdf[j]=abs(self.pdos_data_1.afterdata[orbital][self.atomlist_1[j]]-self.pdos_data_2.afterdata[orbital][self.atomlist_2[j]])
-            self.difdict[orbital]=difdf
-    
-    def peak_range(self):
-        self.pdos_data_1.peakdata()
-        self.pdos_data_2.peakdata()
+    def peak_range(self,Ftype='g'):
+        self.pdos_data_1.peakdata(ftype=Ftype)
+        self.pdos_data_2.peakdata(ftype=Ftype)
     
     def make_L(self):
         siten_dic=dict()
